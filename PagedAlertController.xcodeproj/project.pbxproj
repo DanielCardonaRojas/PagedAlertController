@@ -9,12 +9,17 @@
 /* Begin PBXBuildFile section */
 		C44F3D611D6B95A3006C60C9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C44F3D601D6B95A3006C60C9 /* main.m */; };
 		C44F3D641D6B95A3006C60C9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C44F3D631D6B95A3006C60C9 /* AppDelegate.m */; };
-		C44F3D671D6B95A3006C60C9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C44F3D661D6B95A3006C60C9 /* ViewController.m */; };
+		C44F3D671D6B95A3006C60C9 /* PagedAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C44F3D661D6B95A3006C60C9 /* PagedAlertViewController.m */; };
 		C44F3D6A1D6B95A3006C60C9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C44F3D681D6B95A3006C60C9 /* Main.storyboard */; };
 		C44F3D6C1D6B95A3006C60C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C44F3D6B1D6B95A3006C60C9 /* Assets.xcassets */; };
 		C44F3D6F1D6B95A3006C60C9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C44F3D6D1D6B95A3006C60C9 /* LaunchScreen.storyboard */; };
 		C44F3D7A1D6B95A3006C60C9 /* PagedAlertControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C44F3D791D6B95A3006C60C9 /* PagedAlertControllerTests.m */; };
 		C44F3D851D6B95A3006C60C9 /* PagedAlertControllerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = C44F3D841D6B95A3006C60C9 /* PagedAlertControllerUITests.m */; };
+		C44F3D971D6B9935006C60C9 /* PageContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C44F3D961D6B9935006C60C9 /* PageContentViewController.m */; };
+		C48A25321D6CBE3800E348B8 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C48A25311D6CBE3800E348B8 /* RootViewController.m */; };
+		C48A25351D6CEBEB00E348B8 /* ModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C48A25341D6CEBEB00E348B8 /* ModalViewController.m */; };
+		C4B6175A1D7085B700A36306 /* PagedAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4B617591D7085B700A36306 /* PagedAlertView.xib */; };
+		C4BDE2061D6F9D3C002EA5E7 /* PagedAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BDE2051D6F9D3C002EA5E7 /* PagedAlertView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,8 +44,8 @@
 		C44F3D601D6B95A3006C60C9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C44F3D621D6B95A3006C60C9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		C44F3D631D6B95A3006C60C9 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		C44F3D651D6B95A3006C60C9 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		C44F3D661D6B95A3006C60C9 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		C44F3D651D6B95A3006C60C9 /* PagedAlertViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PagedAlertViewController.h; sourceTree = "<group>"; };
+		C44F3D661D6B95A3006C60C9 /* PagedAlertViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PagedAlertViewController.m; sourceTree = "<group>"; };
 		C44F3D691D6B95A3006C60C9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C44F3D6B1D6B95A3006C60C9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C44F3D6E1D6B95A3006C60C9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -51,6 +56,15 @@
 		C44F3D801D6B95A3006C60C9 /* PagedAlertControllerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PagedAlertControllerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C44F3D841D6B95A3006C60C9 /* PagedAlertControllerUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PagedAlertControllerUITests.m; sourceTree = "<group>"; };
 		C44F3D861D6B95A3006C60C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C44F3D951D6B9935006C60C9 /* PageContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageContentViewController.h; sourceTree = "<group>"; };
+		C44F3D961D6B9935006C60C9 /* PageContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageContentViewController.m; sourceTree = "<group>"; };
+		C48A25301D6CBE3800E348B8 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		C48A25311D6CBE3800E348B8 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		C48A25331D6CEBEB00E348B8 /* ModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModalViewController.h; sourceTree = "<group>"; };
+		C48A25341D6CEBEB00E348B8 /* ModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModalViewController.m; sourceTree = "<group>"; };
+		C4B617591D7085B700A36306 /* PagedAlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PagedAlertView.xib; path = ../PagedAlertView.xib; sourceTree = "<group>"; };
+		C4BDE2041D6F9D3C002EA5E7 /* PagedAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PagedAlertView.h; sourceTree = "<group>"; };
+		C4BDE2051D6F9D3C002EA5E7 /* PagedAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PagedAlertView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,9 +117,14 @@
 			children = (
 				C44F3D621D6B95A3006C60C9 /* AppDelegate.h */,
 				C44F3D631D6B95A3006C60C9 /* AppDelegate.m */,
-				C44F3D651D6B95A3006C60C9 /* ViewController.h */,
-				C44F3D661D6B95A3006C60C9 /* ViewController.m */,
+				C48A25331D6CEBEB00E348B8 /* ModalViewController.h */,
+				C48A25341D6CEBEB00E348B8 /* ModalViewController.m */,
 				C44F3D681D6B95A3006C60C9 /* Main.storyboard */,
+				C44F3D951D6B9935006C60C9 /* PageContentViewController.h */,
+				C44F3D961D6B9935006C60C9 /* PageContentViewController.m */,
+				C48A25301D6CBE3800E348B8 /* RootViewController.h */,
+				C48A25311D6CBE3800E348B8 /* RootViewController.m */,
+				C4BDE2031D6F9CB8002EA5E7 /* ResusableComponents */,
 				C44F3D6B1D6B95A3006C60C9 /* Assets.xcassets */,
 				C44F3D6D1D6B95A3006C60C9 /* LaunchScreen.storyboard */,
 				C44F3D701D6B95A3006C60C9 /* Info.plist */,
@@ -138,6 +157,18 @@
 				C44F3D861D6B95A3006C60C9 /* Info.plist */,
 			);
 			path = PagedAlertControllerUITests;
+			sourceTree = "<group>";
+		};
+		C4BDE2031D6F9CB8002EA5E7 /* ResusableComponents */ = {
+			isa = PBXGroup;
+			children = (
+				C4B617591D7085B700A36306 /* PagedAlertView.xib */,
+				C44F3D651D6B95A3006C60C9 /* PagedAlertViewController.h */,
+				C44F3D661D6B95A3006C60C9 /* PagedAlertViewController.m */,
+				C4BDE2041D6F9D3C002EA5E7 /* PagedAlertView.h */,
+				C4BDE2051D6F9D3C002EA5E7 /* PagedAlertView.m */,
+			);
+			name = ResusableComponents;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -246,6 +277,7 @@
 				C44F3D6F1D6B95A3006C60C9 /* LaunchScreen.storyboard in Resources */,
 				C44F3D6C1D6B95A3006C60C9 /* Assets.xcassets in Resources */,
 				C44F3D6A1D6B95A3006C60C9 /* Main.storyboard in Resources */,
+				C4B6175A1D7085B700A36306 /* PagedAlertView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,9 +302,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C44F3D671D6B95A3006C60C9 /* ViewController.m in Sources */,
+				C44F3D671D6B95A3006C60C9 /* PagedAlertViewController.m in Sources */,
+				C44F3D971D6B9935006C60C9 /* PageContentViewController.m in Sources */,
+				C48A25351D6CEBEB00E348B8 /* ModalViewController.m in Sources */,
+				C4BDE2061D6F9D3C002EA5E7 /* PagedAlertView.m in Sources */,
 				C44F3D641D6B95A3006C60C9 /* AppDelegate.m in Sources */,
 				C44F3D611D6B95A3006C60C9 /* main.m in Sources */,
+				C48A25321D6CBE3800E348B8 /* RootViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -498,6 +534,7 @@
 				C44F3D8B1D6B95A3006C60C9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C44F3D8C1D6B95A3006C60C9 /* Build configuration list for PBXNativeTarget "PagedAlertControllerTests" */ = {
 			isa = XCConfigurationList;
@@ -506,6 +543,7 @@
 				C44F3D8E1D6B95A3006C60C9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C44F3D8F1D6B95A3006C60C9 /* Build configuration list for PBXNativeTarget "PagedAlertControllerUITests" */ = {
 			isa = XCConfigurationList;
@@ -514,6 +552,7 @@
 				C44F3D911D6B95A3006C60C9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
