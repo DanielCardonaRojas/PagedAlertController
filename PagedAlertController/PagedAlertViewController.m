@@ -155,7 +155,6 @@
     
   
     // Create page view controller
-//    UIViewController *startingViewController = [self viewControllerAtIndex:self.index];
     UIViewController *startingViewController = [self contentPageControllerAtIndex:self.index];
     
     NSArray *viewControllers = @[startingViewController];
@@ -192,21 +191,19 @@
 
 #pragma mark - PageController Actions 
 -(void)moveToNextPage{
-//    [self viewControllerAtIndex:self.index + 1];
     UIViewController* nextPage = [self contentPageControllerAtIndex:self.index + 1];
     [self.pageViewController setViewControllers:@[nextPage] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
     
 }
 
 -(void)moveToPreviousPage{
-//    [self viewControllerAtIndex:self.index - 1];
     UIViewController* prevPage = [self contentPageControllerAtIndex:self.index - 1];
     [self.pageViewController setViewControllers:@[prevPage] direction:UIPageViewControllerNavigationDirectionReverse animated:YES completion:nil];
 }
 
 -(void)moveToPageAtIndex:(NSUInteger)idx{
     
-//    [self viewControllerAtIndex:idx];
+    [self contentPageControllerAtIndex:idx];
     
 }
 
@@ -263,9 +260,7 @@
     if (self.allowsSwipe) {
         self.index -= 1;
     }
-    NSLog(@"viewcontroller before viewcontroller");
     
-//    UIViewController* page = [self viewControllerAtIndex:self.index];
     UIViewController* page = [self contentPageControllerAtIndex:self.index];
     return page;
 }
@@ -275,8 +270,7 @@
     if(self.allowsSwipe){
         self.index += 1;
     }
-    NSLog(@"viewcontroller after viewcontroller");
-//    UIViewController* page = [self viewControllerAtIndex:self.index];
+    
     UIViewController* page = [self contentPageControllerAtIndex:self.index];
     return page;
 }
@@ -318,9 +312,6 @@
 
 -(IBAction)tappedNextButton:(id)sender{
     
-//    if([self.delegate respondsToSelector:@selector(didTapNextPageButttonWithSubmissionInfo:)]){
-//        [self.delegate didTapNextPageButttonWithSubmissionInfo:nil];
-//    }
     
     if([self.delegate respondsToSelector:@selector(pagedAlert:shouldFlipToNextPageFromPage:submissionInfo:)]){
         
@@ -333,11 +324,7 @@
 }
 
 -(IBAction)tappedPreviousButton:(id)sender{
-    
-//    if([self.delegate respondsToSelector:@selector(didTapPreviousPageButttonWithSubmissionInfo:)]){
-//        [self.delegate didTapPreviousPageButttonWithSubmissionInfo:nil];
-//    }
-    
+        
     if([self.delegate respondsToSelector:@selector(pagedAlert:shouldFlipToNextPageFromPage:submissionInfo:)]){
         
         BOOL shouldFlipPage = [self.delegate pagedAlert:nil shouldFlipToPreviousPageFromPage:self.index submissionInfo:nil];

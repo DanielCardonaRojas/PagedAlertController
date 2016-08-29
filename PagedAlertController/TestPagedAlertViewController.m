@@ -79,7 +79,7 @@
     
     switch (index) {
         case 0:
-            innerText = @"Put any custom view in this area through the datasource protocol method viewForAlertPage";
+            innerText = @"Put any custom view in this 300x200 area through the datasource protocol method viewForAlertPage";
             break;
         case 1:
             innerText = @"Change Title for each alert page through datasource method titleForPageAtIndex";
@@ -95,6 +95,10 @@
             break;
         case 5:
             innerText = @"Navigate through swipes or buttons";
+            break;
+        
+        case 6:
+            innerText = @"Add view programmatically or configuring the view in the presenting view controller.";
             break;
             
         default:
@@ -114,7 +118,7 @@
     
     [view addSubview:label];
     [view addSubview:textView];
-    [view setBackgroundColor:[UIColor yellowColor]];
+    [view setBackgroundColor:[UIColor lightGrayColor]];
     
     
     return view;

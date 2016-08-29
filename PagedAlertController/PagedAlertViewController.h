@@ -50,14 +50,12 @@
 @protocol PagedAlertDataSource <NSObject>
 
 -(NSUInteger)numberOfPagesForPagedAlertController: (UIViewController*) pagedController;
-//Has to be a viewcontroller with a property pageIndex or try to get rid of the page index
-//- (UIViewController *)viewControllerForPage:(NSUInteger)index;
 - (UIView *)viewForAlertPage:(NSUInteger)index;
 -(NSString*)titleForPageAtIndex:(NSUInteger)index;
 
 
 @optional
-//Change these to properties
+//Change these to properties?
 
 -(BOOL)usesWrappAroundIndexing;
 -(BOOL)showsPageBullets;
