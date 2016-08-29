@@ -54,8 +54,11 @@ Disable swipe gesture of the UIPageController
 Create a cocoapod once polished
 
 Redifine or implement correctly 
+
+```objective-c
 -(BOOL)pagedAlert:(UIView*)view shouldFlipToNextPageFromPage:(NSUInteger)index submissionInfo: (NSDictionary*)info;
 -(BOOL)pagedAlert:(UIView*)view shouldFlipToPreviousPageFromPage:(NSUInteger)index submissionInfo: (NSDictionary*)info;
+```
 
 
 
