@@ -15,6 +15,7 @@ IB_DESIGNABLE
 @property (strong,nonatomic) IBOutlet UIButton* previousButton;
 @property (strong,nonatomic) IBOutlet UILabel* titleLabel;
 @property (strong, nonatomic) IBOutlet UIView *innerContentView;
+@property (weak, nonatomic) IBOutlet UIButton *closeButton;
 
 
 @end

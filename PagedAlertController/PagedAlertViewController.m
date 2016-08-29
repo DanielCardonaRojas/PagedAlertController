@@ -7,17 +7,19 @@
 //
 
 #import "PagedAlertViewController.h"
-#import "PageContentViewController.h"
 #import "PagedAlertView.h"
 
 
 
-@interface PagedAlertViewController () <UIPageViewControllerDataSource,UIPageViewControllerDelegate, PagedAlertDelegate, PagedAlertDataSource>
+@interface PagedAlertViewController () <UIPageViewControllerDataSource,UIPageViewControllerDelegate, PagedAlertDelegate, PagedAlertDataSource, UITextFieldDelegate>
 
 //PageViewController Properties
 @property (strong, nonatomic) UIPageViewController *pageViewController;
+@property (strong,nonatomic) UIView* currentPageContentView;
 
 @property (nonatomic) NSInteger index;
+@property (strong,nonatomic) UITapGestureRecognizer* tapRecognizer;
+
 
 @end
 
@@ -38,42 +40,18 @@
 -(void)stopPagedAlert{
     [self.pageViewController removeFromParentViewController];
     [self.pageViewController.view removeFromSuperview];
+    [self.pageControl removeFromSuperview];
+    [self.pageControl setHidden:YES];
+    [self dismissViewControllerAnimated:YES completion:^{
+//        [self.delegate didDismissPagedAlertController];
+    }];
+    
     
 }
 
 
 #pragma mark - PageViewController Helpers
-- (UIViewController *)viewControllerAtIndex:(NSInteger)index
-{
-    NSUInteger pageCount = [self numberOfPagesForPageViewController];
-    BOOL usesWrapping = NO;
-    if([self.delegate respondsToSelector:@selector(usesWrappAroundIndexing)]){
-        usesWrapping = [self.dataSource usesWrappAroundIndexing];
-    }
-    
-    if (pageCount == 0) {
-        return nil;
-    }
-    
-    if (!usesWrapping && (index < 0 || index >= pageCount)) {
-        return nil;
 
-    }
-    
-    if (usesWrapping) {
-        NSUInteger numPages = [self numberOfPagesForPageViewController];
-        index = index < 0 ? index + numPages : index;
-        index %= numPages;
-    }
-    
-    
-    // Create a new view controller and pass suitable data.
-    UIViewController* pageContent = [self.dataSource viewControllerForPage:index];
-    self.index = index;
-    
-    return pageContent;
-    
-}
 
 - (UIViewController *)contentPageControllerAtIndex:(NSInteger)index{
     
@@ -97,10 +75,19 @@
         index %= numPages;
     }
     
+    //TODO: Recicle these view controllers
     
     // Create a new view controller page.
     UIViewController* pageContentController = [[UIViewController alloc]init];
     [pageContentController.view setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.5]];
+    
+    //Add Tap Gesture Recognizer
+    
+    [self setupTapGesture];
+    UITapGestureRecognizer* tapRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didTapPage:)];
+    [tapRecognizer setNumberOfTapsRequired:1];
+    [tapRecognizer setCancelsTouchesInView:NO];
+    [pageContentController.view.window addGestureRecognizer:tapRecognizer];
     
     
     
@@ -125,10 +112,14 @@
     
     [alertView.previousButton addTarget:self action:@selector(tappedPreviousButton:) forControlEvents:UIControlEventTouchUpInside];
     
+    [alertView.closeButton addTarget:self action:@selector(tappedCloseButton:) forControlEvents:UIControlEventTouchUpInside];
+    
     //TODO: Add user supplied content cell to alert page
     UIView* contentView = [self.dataSource viewForAlertPage:index];
     
     [alertView.innerContentView addSubview:contentView];
+    
+    self.currentPageContentView = contentView;
 
     [pageContentController.view addSubview:alertView];
     self.index = index;
@@ -139,12 +130,21 @@
 
 #pragma mark - View lifecicle
 
+-(void)setupTapGesture{
+    self.tapRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didTapPage:)];
+    [self.tapRecognizer setNumberOfTapsRequired:1];
+    [self.tapRecognizer setCancelsTouchesInView:NO];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self.view setBackgroundColor:[UIColor clearColor]];
+    
+    
     //Init variables
     self.index = 0;
-    [self setAllowsSwipe:YES];
+    [self setAllowsSwipe:NO];
     //Create a page a view controller
     self.pageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
     
@@ -178,6 +178,8 @@
     }
     [self.pageControl setCurrentPage:self.index];
     
+    
+    
     //Modify View appearance
     UIColor* transparentColor = [UIColor colorWithRed:0.f green:0.f blue:0.f alpha:0];
     
@@ -207,6 +209,10 @@
 //    [self viewControllerAtIndex:idx];
     
 }
+
+# pragma mark - TapGesture Recognizer
+
+
 
 #pragma mark - Lazy Instantiation. If no pageControl is hooked up then create a default one
 -(UIPageControl *)pageControl{
@@ -301,21 +307,63 @@
 #pragma mark - IBActions
 
 //TODO: Notify delegate when buttons get tapped passing index
+-(IBAction)tappedCloseButton:(id)sender{
+    
+    if([self.delegate respondsToSelector:@selector(willDismissPagedAlertController:)]){
+        [self.delegate willDismissPagedAlertController];
+    }
+    [self stopPagedAlert];
+    
+}
 
 -(IBAction)tappedNextButton:(id)sender{
     
-    if([self.delegate respondsToSelector:@selector(didTapNextPageButttonWithSubmissionInfo:)]){
-        [self.delegate didTapNextPageButttonWithSubmissionInfo:nil];
+//    if([self.delegate respondsToSelector:@selector(didTapNextPageButttonWithSubmissionInfo:)]){
+//        [self.delegate didTapNextPageButttonWithSubmissionInfo:nil];
+//    }
+    
+    if([self.delegate respondsToSelector:@selector(pagedAlert:shouldFlipToNextPageFromPage:submissionInfo:)]){
+        
+        BOOL shouldFlipPage = [self.delegate pagedAlert:nil shouldFlipToPreviousPageFromPage:self.index submissionInfo:nil];
+        if(shouldFlipPage){
+            [self moveToNextPage];
+        }
     }
     
 }
 
 -(IBAction)tappedPreviousButton:(id)sender{
     
-    if([self.delegate respondsToSelector:@selector(didTapPreviousPageButttonWithSubmissionInfo:)]){
-        [self.delegate didTapPreviousPageButttonWithSubmissionInfo:nil];
+//    if([self.delegate respondsToSelector:@selector(didTapPreviousPageButttonWithSubmissionInfo:)]){
+//        [self.delegate didTapPreviousPageButttonWithSubmissionInfo:nil];
+//    }
+    
+    if([self.delegate respondsToSelector:@selector(pagedAlert:shouldFlipToNextPageFromPage:submissionInfo:)]){
+        
+        BOOL shouldFlipPage = [self.delegate pagedAlert:nil shouldFlipToPreviousPageFromPage:self.index submissionInfo:nil];
+        if(shouldFlipPage){
+            [self moveToPreviousPage];
+        }
     }
     
+}
+
+- (void)didTapPage:(UITapGestureRecognizer *)sender
+{
+    NSLog(@"tapp recognizer");
+    if (sender.state == UIGestureRecognizerStateEnded)
+    {
+        CGPoint location = [sender locationInView:nil]; //Passing nil gives us coordinates in the window
+        NSLog(@"tap in location: %f %f",location.x, location.y);
+        
+        //Convert tap location into the local view's coordinate system. If outside, dismiss the view.
+//        if (![self.view pointInside:[self.pageViewController.view convertPoint:location fromView:self.view.window] withEvent:nil])
+//        {
+//            if(self.presentedViewController) {
+//                [self stopPagedAlert];
+//            }
+//        }
+    }
 }
 
 
@@ -330,13 +378,6 @@
 }
 
 #pragma mark - PagedAlertDataSource
-- (UIViewController *)viewControllerForPage:(NSUInteger)index{
-    PageContentViewController *pageContentViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PageContentViewController"];
-    [pageContentViewController.view setBackgroundColor:[UIColor clearColor]];
-    [pageContentViewController.alertPageTitleLabel setText:@"ContentView"];    
-    
-    return pageContentViewController;
-}
 
 //View cell for alert page
 -(UIView *)viewForAlertPage:(NSUInteger)index{
@@ -350,6 +391,7 @@
     [label setText:@"hola"];
     
     UITextField* textView = [[UITextField alloc]initWithFrame:frame2];
+    [textView setDelegate:self];
     [textView setText:@"test"];
     [textView setTextColor:[UIColor blueColor]];
     [textView setClipsToBounds:YES];
@@ -358,6 +400,7 @@
     [view addSubview:label];
     [view addSubview:textView];
     [view setBackgroundColor:[UIColor yellowColor]];
+    
     
     return view;
 }
@@ -383,7 +426,7 @@
 
 #pragma mark - PagedAlertDelegate
 
--(void)didTapNextPageButttonWithSubmissionInfo:(NSDictionary *)info{
+-(void)page:(NSDictionary *)info{
     //If Info test succeeds
     NSLog(@"tapped next button alertview delegate",nil);
     //Advance to next page
@@ -392,17 +435,25 @@
     
 }
 
-
--(void)didTapPreviousPageButttonWithSubmissionInfo:(NSDictionary *)info{
-    //If Info test succeeds
-    NSLog(@"tapped prev button alertview delegate",nil);
-    //Advance to next page
-    [self moveToPreviousPage];
-    //Stop alertpaged presentation or freeze at current page?
-    
+-(BOOL)pagedAlert:(UIView *)view shouldFlipToPreviousPageFromPage:(NSUInteger)integer submissionInfo:(NSDictionary *)info{
+     NSLog(@"tapped prev button alertview delegate",nil);
+    return YES;
 }
 
+-(BOOL)pagedAlert:(UIView *)view shouldFlipToNextPageFromPage:(NSUInteger)integer submissionInfo:(NSDictionary *)info{
+     NSLog(@"tapped next button alertview delegate",nil);
+    
+    return YES;
+}
 
+#pragma mark - UITextFieldDelegate
+
+
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    
+    NSLog(@"textfield input: %@", string);
+    return NO;
+}
 
 
 

@@ -11,7 +11,7 @@
  */
 
 #import <UIKit/UIKit.h>
-#import "PageContentViewController.h"
+
 /*
  This Viewcontroller provides a Alert like mixed with a uipage controller.With a transparent
  background. All View have a next and previous button a title and an area for a custom view to be 
@@ -19,22 +19,31 @@
  
  Bullets can be displayed or not.
  
+ 
  TODO:
  
  choose between viewControllerForPage or viewForAlertPage methods
  the advatnage of implementing the later is that only views need to be passed.
  
+ Or think of a way to keep both to be more generic.
  
+ - Dismiss controller on tap outside the alert area, call delegate method when this happens
+ 
+ - Toggle swip, figure out how to disable
 */
+
 //TODO: Subclass UIViewController and change respective protocol method parameters
 @protocol PagedAlertDelegate <NSObject>
 
 @optional
 -(void)didTurnToPageAtIndex:(NSUInteger)pageIndex;
 -(void)willStartPagedAlertController:(UIViewController*) pagedController;
--(void)didTapNextPageButttonWithSubmissionInfo:(NSDictionary*)info;
--(void)didTapPreviousPageButttonWithSubmissionInfo:(NSDictionary*)info;
+-(BOOL)pagedAlert:(UIView*)view shouldFlipToNextPageFromPage:(NSUInteger)integer submissionInfo: (NSDictionary*)info;
+-(BOOL)pagedAlert: (UIView*)view shouldFlipToPreviousPageFromPage:(NSUInteger)integer submissionInfo: (NSDictionary*)info;
 
+
+-(void)willDismissPagedAlertController;
+-(void)didDismissPagedAlertController;
 
 @end
 
@@ -42,29 +51,19 @@
 
 -(NSUInteger)numberOfPagesForPagedAlertController: (UIViewController*) pagedController;
 //Has to be a viewcontroller with a property pageIndex or try to get rid of the page index
-//- (PageContentViewController *)viewControllerForPage:(NSUInteger)index;
-
-- (UIViewController *)viewControllerForPage:(NSUInteger)index;
+//- (UIViewController *)viewControllerForPage:(NSUInteger)index;
+- (UIView *)viewForAlertPage:(NSUInteger)index;
 -(NSString*)titleForPageAtIndex:(NSUInteger)index;
 
 
-
-
 @optional
-- (UIView *)viewForAlertPage:(NSUInteger)index;
+//Change these to properties
 
 -(BOOL)usesWrappAroundIndexing;
 -(BOOL)showsPageBullets;
 
 
-
-
-
-
-
 @end
-
-
 
 
 @interface PagedAlertViewController : UIViewController
@@ -84,4 +83,9 @@
 @property (weak,nonatomic) id<PagedAlertDataSource> dataSource;
 
 @end
+
+
+
+
+
 

@@ -1,28 +1,49 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="4dm-sQ-HdT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ASc-iw-Z7a">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Modal View Controller-->
-        <scene sceneID="3KM-Gj-osk">
+        <!--Test Paged Alert View Controller-->
+        <scene sceneID="7uL-3K-Nob">
             <objects>
-                <viewController storyboardIdentifier="ModalViewController" id="94X-fJ-ch4" customClass="ModalViewController" sceneMemberID="viewController">
+                <viewController id="ASc-iw-Z7a" customClass="TestPagedAlertViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="03c-q4-h36"/>
-                        <viewControllerLayoutGuide type="bottom" id="Jmu-7g-YG6"/>
+                        <viewControllerLayoutGuide type="top" id="xf9-Dk-PKw"/>
+                        <viewControllerLayoutGuide type="bottom" id="Q8Z-aC-7eV"/>
                     </layoutGuides>
-                    <view key="view" alpha="0.55000000000000004" contentMode="scaleToFill" id="dVo-aE-ikC">
+                    <view key="view" contentMode="scaleToFill" id="1iK-Ly-XHO">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.33080515224563511" green="1" blue="0.99687143771356668" alpha="1" colorSpace="calibratedRGB"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="TestPagedAlert" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AA6-J9-RZ8">
+                                <rect key="frame" x="236" y="191" width="118" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="doX-Xw-1xX">
+                                <rect key="frame" x="207" y="487" width="186" height="30"/>
+                                <state key="normal" title="Show PagedAlertController"/>
+                                <connections>
+                                    <action selector="showPagedAlert:" destination="ASc-iw-Z7a" eventType="touchUpInside" id="uU6-ah-G6f"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="doX-Xw-1xX" firstAttribute="centerX" secondItem="1iK-Ly-XHO" secondAttribute="centerX" id="ASW-Zn-fAN"/>
+                            <constraint firstItem="AA6-J9-RZ8" firstAttribute="centerX" secondItem="1iK-Ly-XHO" secondAttribute="centerX" id="WcV-tV-A4t"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <segue destination="4dm-sQ-HdT" kind="presentation" identifier="toPagedAlert" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="1uJ-p4-OmF"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="adr-or-dfb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rGb-dr-N7U" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="999" y="1046"/>
+            <point key="canvasLocation" x="313" y="1222"/>
         </scene>
         <!--Paged Alert View Controller-->
         <scene sceneID="21v-YT-udJ">
@@ -36,99 +57,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vvT-84-pha">
-                                <rect key="frame" x="277" y="540" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vvT-84-pha">
+                                <rect key="frame" x="254" y="513" width="94" height="30"/>
+                                <state key="normal" title="Does Nothing"/>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="PagedAlertController Decoration Text" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Do-9J-x6f">
+                                <rect key="frame" x="157" y="33" width="286" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.31979623460000001" green="0.92111113950000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="vvT-84-pha" firstAttribute="centerX" secondItem="Mx6-V4-rxw" secondAttribute="centerX" id="TCV-xc-e4h"/>
+                            <constraint firstItem="2Do-9J-x6f" firstAttribute="centerX" secondItem="Mx6-V4-rxw" secondAttribute="centerX" id="mDd-UY-xCP"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AUA-eV-hPu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="319" y="368"/>
-        </scene>
-        <!--Page Content View Controller-->
-        <scene sceneID="0BG-s2-GGy">
-            <objects>
-                <viewController storyboardIdentifier="PageContentViewController" modalPresentationStyle="overCurrentContext" id="EVy-sN-beR" customClass="PageContentViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="ZGH-hy-SmN"/>
-                        <viewControllerLayoutGuide type="bottom" id="gUv-wT-Fac"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="GRl-f9-Uvr">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Shz-Gj-qu6">
-                                <rect key="frame" x="59" y="163" width="494" height="273"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="895-PD-j5t">
-                                        <rect key="frame" x="32" y="215" width="133" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="133" id="Obl-yO-jzE"/>
-                                        </constraints>
-                                        <state key="normal" title="Prev">
-                                            <color key="titleColor" red="1" green="0.16443011571807276" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                    </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem ipsum dolor em" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lQo-hd-HEy">
-                                        <rect key="frame" x="99" y="55" width="297" height="51"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="51" id="Ujh-Rb-zP3"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="faI-fJ-tAU">
-                                        <rect key="frame" x="99" y="13" width="297" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CJI-iI-hUq">
-                                        <rect key="frame" x="353" y="215" width="133" height="30"/>
-                                        <state key="normal" title="Next">
-                                            <color key="titleColor" red="1" green="0.16443011569999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" red="0.31979623457549566" green="0.92111113953739543" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstItem="faI-fJ-tAU" firstAttribute="centerX" secondItem="Shz-Gj-qu6" secondAttribute="centerX" id="9qP-Fp-IyA"/>
-                                    <constraint firstItem="lQo-hd-HEy" firstAttribute="leading" secondItem="Shz-Gj-qu6" secondAttribute="leading" constant="99" id="NPa-Wv-oFC"/>
-                                    <constraint firstItem="CJI-iI-hUq" firstAttribute="leading" secondItem="895-PD-j5t" secondAttribute="trailing" constant="31" id="Nm4-4N-yVN"/>
-                                    <constraint firstItem="895-PD-j5t" firstAttribute="baseline" secondItem="CJI-iI-hUq" secondAttribute="baseline" id="Rao-0X-ymd"/>
-                                    <constraint firstItem="lQo-hd-HEy" firstAttribute="leading" secondItem="faI-fJ-tAU" secondAttribute="leading" id="YIX-Dk-dQO"/>
-                                    <constraint firstItem="lQo-hd-HEy" firstAttribute="centerX" secondItem="Shz-Gj-qu6" secondAttribute="centerX" id="aaM-Lc-KIs"/>
-                                    <constraint firstAttribute="bottom" secondItem="895-PD-j5t" secondAttribute="bottom" constant="28" id="h2Z-Zw-h5Q"/>
-                                    <constraint firstItem="lQo-hd-HEy" firstAttribute="top" secondItem="faI-fJ-tAU" secondAttribute="bottom" constant="21" id="qM4-mE-AEe"/>
-                                    <constraint firstAttribute="trailing" secondItem="CJI-iI-hUq" secondAttribute="trailing" constant="8" id="tqc-LG-hYF"/>
-                                    <constraint firstItem="895-PD-j5t" firstAttribute="leading" secondItem="Shz-Gj-qu6" secondAttribute="leading" constant="32" id="vDh-bK-n53"/>
-                                    <constraint firstItem="lQo-hd-HEy" firstAttribute="top" secondItem="Shz-Gj-qu6" secondAttribute="top" constant="55" id="vKX-qD-2ri"/>
-                                </constraints>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="Shz-Gj-qu6" secondAttribute="trailing" constant="27" id="0kK-hA-bsd"/>
-                            <constraint firstItem="Shz-Gj-qu6" firstAttribute="top" secondItem="ZGH-hy-SmN" secondAttribute="bottom" constant="143" id="Oh0-j7-gOk"/>
-                            <constraint firstItem="Shz-Gj-qu6" firstAttribute="leading" secondItem="GRl-f9-Uvr" secondAttribute="leadingMargin" constant="39" id="uYG-rf-1GD"/>
-                            <constraint firstItem="Shz-Gj-qu6" firstAttribute="centerY" secondItem="GRl-f9-Uvr" secondAttribute="centerY" id="w6s-26-liy"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="alertPageTitleLabel" destination="faI-fJ-tAU" id="QUN-n9-7RA"/>
-                        <outlet property="alertPageTopMessageLabel" destination="lQo-hd-HEy" id="PJ8-Oi-A2I"/>
-                        <outlet property="containerView" destination="Shz-Gj-qu6" id="DGy-6G-BPF"/>
-                        <outlet property="nextButton" destination="CJI-iI-hUq" id="Rtw-PA-mQI"/>
-                        <outlet property="prevButton" destination="895-PD-j5t" id="Xsu-AT-Hat"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="41L-bO-pFH" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1650" y="1046"/>
         </scene>
     </scenes>
 </document>
