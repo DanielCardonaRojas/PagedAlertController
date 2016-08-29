@@ -15,7 +15,7 @@ By itself in only adds navigating functionality, validation and content design i
 # Detailed Description of Protocols
 
 
-```shell objective-c
+``` objective-c
 @protocol PagedAlertDelegate <NSObject>
 
 @optional
@@ -46,8 +46,6 @@ By itself in only adds navigating functionality, validation and content design i
 
 @end
 ```
-
-
 
 
 # TODO
