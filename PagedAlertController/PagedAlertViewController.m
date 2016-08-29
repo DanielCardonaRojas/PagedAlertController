@@ -99,6 +99,8 @@
     PagedAlertView* alertView = [[PagedAlertView alloc]initWithFrame:alertFrame];
     alertView.center = self.view.center;
     
+    
+    
     //Configure title
     
     if([self.dataSource respondsToSelector:@selector(titleForPageAtIndex:)]){
@@ -115,9 +117,30 @@
     [alertView.closeButton addTarget:self action:@selector(tappedCloseButton:) forControlEvents:UIControlEventTouchUpInside];
     
     //TODO: Add user supplied content cell to alert page
-    UIView* contentView = [self.dataSource viewForAlertPage:index];
+    
+    UIView* contentView;
+    
+    if([self.dataSource respondsToSelector:@selector(viewForAlertPage:)]){
+        contentView = [self.dataSource viewForAlertPage:index];
+    }
+    
+    
+    
+    contentView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    [contentView removeFromSuperview];
     
     [alertView.innerContentView addSubview:contentView];
+    [contentView setFrame:contentView.superview.bounds];
+    [alertView.innerContentView bringSubviewToFront:contentView];
+//    [contentView setFrame:contentView.superview.frame];
+//    [contentView didMoveToSuperview];
+    
+    
+    NSLog(@"PageController center: %f %f", pageContentController.view.center.x,pageContentController.view.center.y);
+    NSLog(@"Content center: %f %f", contentView.center.x,contentView.center.y);
+    NSLog(@"Container center: %f %f", contentView.superview.center.x,contentView.superview.center.y);
+    NSLog(@"Superview description %@",[[contentView superview] description]);
+    
     
     self.currentPageContentView = contentView;
 
@@ -335,6 +358,7 @@
     
 }
 
+//TODO: Make taps outside alert content dismiss controller depending on a configuration property
 - (void)didTapPage:(UITapGestureRecognizer *)sender
 {
     NSLog(@"tapp recognizer");

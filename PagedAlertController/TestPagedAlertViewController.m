@@ -9,6 +9,8 @@
 #import "TestPagedAlertViewController.h"
 
 @interface TestPagedAlertViewController ()
+@property (strong, nonatomic) IBOutlet UIView *alertContentView;
+@property (weak, nonatomic) IBOutlet UILabel *alertContentLabel;
 
 @end
 
@@ -16,6 +18,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.alertContentView setHidden:YES];
     // Do any additional setup after loading the view.
 }
 
@@ -45,6 +48,10 @@
     
 }
 
+- (IBAction)pagedAlertFacebookTapped:(id)sender {
+    
+    NSLog(@"tapped facebook button");
+}
 
 /*=================== DEFAULT/EXAMPLE IMPLEMENTATION DATASOURCE AND DELEGATE ============================= */
 
@@ -57,16 +64,11 @@
 }
 
 #pragma mark - PagedAlertDataSource
-//- (UIViewController *)viewControllerForPage:(NSUInteger)index{
-//    PageContentViewController *pageContentViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PageContentViewController"];
-//    [pageContentViewController.view setBackgroundColor:[UIColor clearColor]];
-//    [pageContentViewController.alertPageTitleLabel setText:@"ContentView"];
-//    
-//    return pageContentViewController;
-//}
 
 //View cell for alert page
 -(UIView *)viewForAlertPage:(NSUInteger)index{
+    
+    [self.alertContentView setHidden:YES];
     CGRect frame = CGRectMake(25, 0, 250, 80);
     CGRect frame2 = CGRectMake(70, 100, 150, 40);
     UIView* view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, 200)];
@@ -75,7 +77,8 @@
     UILabel* label = [[UILabel alloc]initWithFrame:frame];
     [label setClipsToBounds:NO];
     [label setNumberOfLines:3];
-    NSString* innerText;
+    NSString* innerText = @"";
+
     
     switch (index) {
         case 0:
@@ -109,6 +112,7 @@
     [label setText:innerText];
     
     
+    
     UITextField* textView = [[UITextField alloc]initWithFrame:frame2];
     [textView setDelegate:self];
     [textView setText:@"test"];
@@ -120,12 +124,24 @@
     [view addSubview:textView];
     [view setBackgroundColor:[UIColor lightGrayColor]];
     
+    if (index == 6) {
+        
+        [self.alertContentView setHidden:NO];
+        [self.alertContentLabel setText:innerText];
+//        [self.alertContentView removeFromSuperview];
+        [self.alertContentView setFrame:CGRectMake(150.f,  100.f, 150.f, 100.f)];
+        
+        return  self.alertContentView;
+        
+        
+        
+    }
     
     return view;
 }
 
 -(NSUInteger)numberOfPagesForPagedAlertController:(UIViewController *)pagedController{
-    return 5;
+    return 7;
 }
 
 -(NSString *)titleForPageAtIndex:(NSUInteger)index{

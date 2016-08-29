@@ -43,22 +43,25 @@ By itself in only adds navigating functionality, validation and content design i
 -(BOOL)usesWrappAroundIndexing;
 -(BOOL)showsPageBullets;
 
-
 @end
 ```
 
-
 # TODO
 
-Disable swipe gesture of the UIPageController
-Create a cocoapod once polished
+- Disable swipe gesture of the UIPageController
+- Create a cocoapod once polished
 
-Redifine or implement correctly 
+- Redifine or implement correctly 
 
 ```objective-c
 -(BOOL)pagedAlert:(UIView*)view shouldFlipToNextPageFromPage:(NSUInteger)index submissionInfo: (NSDictionary*)info;
 -(BOOL)pagedAlert:(UIView*)view shouldFlipToPreviousPageFromPage:(NSUInteger)index submissionInfo: (NSDictionary*)info;
 ```
 
+- Make UITapGestureRecognizer dismiss the PagedAlertController when tapped on outer area.
+- Remove UIPageViewController bounce
+- Define constraints on PageAlertView xib
+
+- FIX: Views added throught storyboard dont get centered in container (innerContentView e.g page 6) but views added programatically do. 
 
 
