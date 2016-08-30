@@ -24,7 +24,6 @@
     self = [super initWithFrame:frame];
     if (self) {
         //Initialization code
-//        [self.innerContentView addSubview: self.innerContent];
         [self setup];
         
     }
