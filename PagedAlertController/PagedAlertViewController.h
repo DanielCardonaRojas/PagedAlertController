@@ -38,8 +38,8 @@
 @optional
 -(void)didTurnToPageAtIndex:(NSUInteger)pageIndex;
 -(void)willStartPagedAlertController:(UIViewController*) pagedController;
--(BOOL)pagedAlert:(UIView*)view shouldFlipToNextPageFromPage:(NSUInteger)integer submissionInfo: (NSDictionary*)info;
--(BOOL)pagedAlert: (UIView*)view shouldFlipToPreviousPageFromPage:(NSUInteger)integer submissionInfo: (NSDictionary*)info;
+-(BOOL)pagedAlert:(UIView*)view shouldFlipToNextPageFromPage:(NSUInteger)integer;
+-(BOOL)pagedAlert: (UIView*)view shouldFlipToPreviousPageFromPage:(NSUInteger)integer;
 
 
 -(void)willDismissPagedAlertController;
@@ -51,7 +51,10 @@
 
 -(NSUInteger)numberOfPagesForPagedAlertController: (UIViewController*) pagedController;
 - (UIView *)viewForAlertPage:(NSUInteger)index;
+-(UIView*)updateViewOnPageFlipForwardRejection:(UIView*)view pageIndex:(NSUInteger)index;
+-(UIView*)updateViewOnPageFlipBackwardRejection:(UIView*)view pageIndex:(NSUInteger)index;
 -(NSString*)titleForPageAtIndex:(NSUInteger)index;
+-(BOOL)allowsSwipe;
 
 
 @optional
@@ -75,7 +78,7 @@
 @property (strong,nonatomic) UIColor* bulletColor;
 @property (strong,nonatomic) UIColor* pageControlBackgroundColor;
 @property (strong,nonatomic) UIPageControl* pageControl;
-@property BOOL allowsSwipe;
+
 
 @property (weak,nonatomic) id<PagedAlertDelegate> delegate;
 @property (weak,nonatomic) id<PagedAlertDataSource> dataSource;

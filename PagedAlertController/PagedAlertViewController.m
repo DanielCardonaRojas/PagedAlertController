@@ -75,7 +75,7 @@
         index %= numPages;
     }
     
-    //TODO: Recicle these view controllers
+    //TODO(nonatomic) (nonatomic) (nonatomic) (nonatomic) : Recicle these view controllers
     
     // Create a new view controller page.
     UIViewController* pageContentController = [[UIViewController alloc]init];
@@ -83,11 +83,11 @@
     
     //Add Tap Gesture Recognizer
     
-    [self setupTapGesture];
     UITapGestureRecognizer* tapRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didTapPage:)];
     [tapRecognizer setNumberOfTapsRequired:1];
     [tapRecognizer setCancelsTouchesInView:NO];
-    [pageContentController.view.window addGestureRecognizer:tapRecognizer];
+    [pageContentController.view addGestureRecognizer:tapRecognizer];
+    
     
     
     
@@ -153,12 +153,6 @@
 
 #pragma mark - View lifecicle
 
--(void)setupTapGesture{
-    self.tapRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didTapPage:)];
-    [self.tapRecognizer setNumberOfTapsRequired:1];
-    [self.tapRecognizer setCancelsTouchesInView:NO];
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -166,14 +160,20 @@
     
     
     //Init variables
-    self.index = 0;
-    [self setAllowsSwipe:NO];
+    self.index = 0;    
     //Create a page a view controller
     self.pageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
     
     
     //Default to self TODO: Check this works and doesnt affect real delegate controller
-    [self.pageViewController setDataSource:self];
+    if([self.dataSource respondsToSelector:@selector(allowsSwipe)]){
+        if (![self.dataSource allowsSwipe]) {
+            [self.pageViewController setDataSource:nil];
+        }else{
+            [self.pageViewController setDataSource:self];
+        }
+    }
+//    [self.pageViewController setDataSource:self];
     [self.pageViewController setDelegate:self];
     
   
@@ -276,6 +276,8 @@
     return _pageControlBackgroundColor;
 }
 
+
+
 #pragma mark - UIPageViewController Data Source
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController
@@ -326,7 +328,7 @@
 //TODO: Notify delegate when buttons get tapped passing index
 -(IBAction)tappedCloseButton:(id)sender{
     
-    if([self.delegate respondsToSelector:@selector(willDismissPagedAlertController:)]){
+    if([self.delegate respondsToSelector:@selector(willDismissPagedAlertController)]){
         [self.delegate willDismissPagedAlertController];
     }
     [self stopPagedAlert];
@@ -336,11 +338,21 @@
 -(IBAction)tappedNextButton:(id)sender{
     
     
-    if([self.delegate respondsToSelector:@selector(pagedAlert:shouldFlipToNextPageFromPage:submissionInfo:)]){
+    if([self.delegate respondsToSelector:@selector(pagedAlert:shouldFlipToNextPageFromPage:)]){
         
-        BOOL shouldFlipPage = [self.delegate pagedAlert:nil shouldFlipToPreviousPageFromPage:self.index submissionInfo:nil];
+        BOOL shouldFlipPage = [self.delegate pagedAlert:self.currentPageContentView
+                           shouldFlipToNextPageFromPage:self.index];
+        
         if(shouldFlipPage){
             [self moveToNextPage];
+        }else{
+            //Shouldnt advance or rewind page so give a change to update view (maybe show validation or so)
+            if([self.dataSource respondsToSelector:@selector(updateViewOnPageFlipForwardRejection:pageIndex:)]){
+                UIView* updatedView = [self.dataSource updateViewOnPageFlipForwardRejection:self.currentPageContentView pageIndex:self.index];
+                
+                //set this updatedview
+                [self setCurrentPageContentView:updatedView];
+            }
         }
     }
     
@@ -348,9 +360,9 @@
 
 -(IBAction)tappedPreviousButton:(id)sender{
         
-    if([self.delegate respondsToSelector:@selector(pagedAlert:shouldFlipToNextPageFromPage:submissionInfo:)]){
+    if([self.delegate respondsToSelector:@selector(pagedAlert:shouldFlipToPreviousPageFromPage:)]){
         
-        BOOL shouldFlipPage = [self.delegate pagedAlert:nil shouldFlipToPreviousPageFromPage:self.index submissionInfo:nil];
+        BOOL shouldFlipPage = [self.delegate pagedAlert:nil shouldFlipToPreviousPageFromPage:self.index];
         if(shouldFlipPage){
             [self moveToPreviousPage];
         }
@@ -361,6 +373,7 @@
 //TODO: Make taps outside alert content dismiss controller depending on a configuration property
 - (void)didTapPage:(UITapGestureRecognizer *)sender
 {
+    [[self.currentPageContentView subviews] makeObjectsPerformSelector:@selector(resignFirstResponder)];
     NSLog(@"tapp recognizer");
     if (sender.state == UIGestureRecognizerStateEnded)
     {
@@ -433,6 +446,9 @@
     return YES;
 }
 
+-(BOOL)allowsSwipe{
+    return NO;
+}
 
 
 #pragma mark - PagedAlertDelegate
@@ -457,6 +473,11 @@
     return YES;
 }
 
+-(void)willDismissPagedAlertController{
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 #pragma mark - UITextFieldDelegate
 
 
@@ -465,6 +486,9 @@
     NSLog(@"textfield input: %@", string);
     return NO;
 }
+
+
+
 
 
 

@@ -11,6 +11,7 @@
 @interface TestPagedAlertViewController ()
 @property (strong, nonatomic) IBOutlet UIView *alertContentView;
 @property (weak, nonatomic) IBOutlet UILabel *alertContentLabel;
+@property BOOL shouldAdvancePage;
 
 @end
 
@@ -36,7 +37,7 @@
     PagedAlertViewController* pagedAlert = (PagedAlertViewController*)[segue destinationViewController];
     
     [pagedAlert setDelegate:self];
-    [pagedAlert setDataSource:self];
+    [pagedAlert setDataSource:self];    
 }
 
 
@@ -71,10 +72,14 @@
     [self.alertContentView setHidden:YES];
     CGRect frame = CGRectMake(25, 0, 250, 80);
     CGRect frame2 = CGRectMake(70, 100, 150, 40);
+    CGRect frame3 = CGRectMake(70, 140, 150, 40);
     UIView* view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, 200)];
     
     
     UILabel* label = [[UILabel alloc]initWithFrame:frame];
+    UILabel* validationLabel = [[UILabel alloc]initWithFrame:frame3];
+    [validationLabel setTag:3];
+    [validationLabel setHidden:NO];
     [label setClipsToBounds:NO];
     [label setNumberOfLines:3];
     NSString* innerText = @"";
@@ -122,6 +127,7 @@
     
     [view addSubview:label];
     [view addSubview:textView];
+    [view addSubview:validationLabel];
     [view setBackgroundColor:[UIColor lightGrayColor]];
     
     if (index == 6) {
@@ -135,6 +141,20 @@
         
         
         
+    }
+    
+    return view;
+}
+
+-(UIView *)updateViewOnPageFlipForwardRejection:(UIView *)view pageIndex:(NSUInteger)index{
+    
+    for (UIView *i in view.subviews){
+        if([i isKindOfClass:[UILabel class]]){
+            UILabel *newLbl = (UILabel *)i;
+            if(newLbl.tag == 3){
+                [newLbl setText:@"Wrong input"];
+            }
+        }
     }
     
     return view;
@@ -157,27 +177,41 @@
     return YES;
 }
 
+-(BOOL)allowsSwipe{
+    return NO;
+}
+
+
 
 
 #pragma mark - PagedAlertDelegate
 
--(BOOL)pagedAlert:(UIView *)view shouldFlipToPreviousPageFromPage:(NSUInteger)integer submissionInfo:(NSDictionary *)info{
+-(BOOL)pagedAlert:(UIView *)view shouldFlipToPreviousPageFromPage:(NSUInteger)integer{
+    
     NSLog(@"tapped prev button alertview test controller delegate",nil);
     return YES;
 }
 
--(BOOL)pagedAlert:(UIView *)view shouldFlipToNextPageFromPage:(NSUInteger)integer submissionInfo:(NSDictionary *)info{
+-(BOOL)pagedAlert:(UIView *)view shouldFlipToNextPageFromPage:(NSUInteger)integer{
     NSLog(@"tapped next button alertview teste controller delegate",nil);
     
-    return YES;
+    
+    
+    return self.shouldAdvancePage;
 }
 
 #pragma mark - UITextFieldDelegate
 
 
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    NSString* fullText = [textField.text stringByAppendingString:string];
+    NSLog(@"textfield input: %@", fullText);
+    if([fullText length] == 4){
+        self.shouldAdvancePage = YES;
+    }else{
+        self.shouldAdvancePage = NO;
+    }
     
-    NSLog(@"textfield input: %@", string);
     return YES;
 }
 
