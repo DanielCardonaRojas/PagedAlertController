@@ -51,8 +51,7 @@
 
 -(NSUInteger)numberOfPagesForPagedAlertController: (UIViewController*) pagedController;
 - (UIView *)viewForAlertPage:(NSUInteger)index;
--(UIView*)updateViewOnPageFlipForwardRejection:(UIView*)view pageIndex:(NSUInteger)index;
--(UIView*)updateViewOnPageFlipBackwardRejection:(UIView*)view pageIndex:(NSUInteger)index;
+
 -(NSString*)titleForPageAtIndex:(NSUInteger)index;
 -(BOOL)allowsSwipe;
 
@@ -62,7 +61,8 @@
 
 -(BOOL)usesWrappAroundIndexing;
 -(BOOL)showsPageBullets;
-
+-(UIView*)updateViewOnPageFlipForwardRejection:(UIView*)view pageIndex:(NSUInteger)index;
+-(UIView*)updateViewOnPageFlipBackwardRejection:(UIView*)view pageIndex:(NSUInteger)index;
 
 @end
 

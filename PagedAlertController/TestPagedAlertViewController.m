@@ -120,7 +120,7 @@
     
     UITextField* textView = [[UITextField alloc]initWithFrame:frame2];
     [textView setDelegate:self];
-    [textView setText:@"test"];
+    [textView setPlaceholder:@"Type anything"];
     [textView setTextColor:[UIColor blueColor]];
     [textView setClipsToBounds:YES];
     [textView setBackgroundColor:[UIColor redColor]];
@@ -194,8 +194,6 @@
 
 -(BOOL)pagedAlert:(UIView *)view shouldFlipToNextPageFromPage:(NSUInteger)integer{
     NSLog(@"tapped next button alertview teste controller delegate",nil);
-    
-    
     
     return self.shouldAdvancePage;
 }
