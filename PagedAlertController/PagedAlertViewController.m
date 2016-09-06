@@ -127,11 +127,12 @@
     
     
     contentView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    [contentView removeFromSuperview];
+//    [contentView removeFromSuperview];
     
     [alertView.innerContentView addSubview:contentView];
-    [contentView setFrame:contentView.superview.bounds];
-    [alertView.innerContentView bringSubviewToFront:contentView];
+    [[UIApplication sharedApplication].keyWindow bringSubviewToFront:contentView];
+//    [contentView setFrame:contentView.superview.bounds];
+//    [alertView.innerContentView bringSubviewToFront:contentView];
 //    [contentView setFrame:contentView.superview.frame];
 //    [contentView didMoveToSuperview];
     
@@ -215,12 +216,21 @@
 #pragma mark - PageController Actions 
 -(void)moveToNextPage{
     UIViewController* nextPage = [self contentPageControllerAtIndex:self.index + 1];
+    //Notify delegate movement to next page
+    if([self.delegate respondsToSelector:@selector(pagedAlert:didTurnToPageAtIndex:)]){
+        [self.delegate pagedAlert:self.currentPageContentView didTurnToPageAtIndex:self.index];
+    }
     [self.pageViewController setViewControllers:@[nextPage] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
     
 }
 
 -(void)moveToPreviousPage{
     UIViewController* prevPage = [self contentPageControllerAtIndex:self.index - 1];
+    //Notify delegate movement to previous page
+    if([self.delegate respondsToSelector:@selector(pagedAlert:didTurnToPageAtIndex:)]){
+        [self.delegate pagedAlert:self.currentPageContentView didTurnToPageAtIndex:self.index];
+    }
+    
     [self.pageViewController setViewControllers:@[prevPage] direction:UIPageViewControllerNavigationDirectionReverse animated:YES completion:nil];
 }
 
@@ -237,7 +247,7 @@
 #pragma mark - Lazy Instantiation. If no pageControl is hooked up then create a default one
 -(UIPageControl *)pageControl{
     if (!_pageControl) {
-        CGRect frame = CGRectMake(self.view.frame.size.width*0.25, self.view.frame.size.height*0.8, self.view.frame.size.width*0.5, self.view.frame.size.height*0.05);
+        CGRect frame = CGRectMake(self.view.frame.size.width*0.25, self.view.frame.size.height*0.7, self.view.frame.size.width*0.5, self.view.frame.size.height*0.05);
         
         _pageControl = [[UIPageControl alloc]initWithFrame:frame];        
         [_pageControl setCurrentPage:0];
@@ -311,8 +321,8 @@
     
     [self.pageControl setCurrentPage:self.index];
     
-    if([self.delegate respondsToSelector:@selector(didTurnToPageAtIndex:)]){
-        [self.delegate didTurnToPageAtIndex:self.index];
+    if([self.delegate respondsToSelector:@selector(pagedAlert:didTurnToPageAtIndex:)]){
+        [self.delegate pagedAlert:self.currentPageContentView didTurnToPageAtIndex:self.index];
     }
     
 }
@@ -344,7 +354,9 @@
                            shouldFlipToNextPageFromPage:self.index];
         
         if(shouldFlipPage){
+            
             [self moveToNextPage];
+            
         }else{
             //Shouldnt advance or rewind page so give a change to update view (maybe show validation or so)
             if([self.dataSource respondsToSelector:@selector(updateViewOnPageFlipForwardRejection:pageIndex:)]){

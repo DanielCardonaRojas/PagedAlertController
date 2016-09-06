@@ -7,6 +7,7 @@
 //
 
 #import "TestPagedAlertViewController.h"
+#import "SocialPageView.h"
 
 @interface TestPagedAlertViewController ()
 @property (strong, nonatomic) IBOutlet UIView *alertContentView;
@@ -81,7 +82,7 @@
     [validationLabel setTag:3];
     [validationLabel setHidden:NO];
     [label setClipsToBounds:NO];
-    [label setNumberOfLines:3];
+    [label setNumberOfLines:4];
     NSString* innerText = @"";
 
     
@@ -132,14 +133,12 @@
     
     if (index == 6) {
         
-        [self.alertContentView setHidden:NO];
-        [self.alertContentLabel setText:innerText];
-//        [self.alertContentView removeFromSuperview];
-        [self.alertContentView setFrame:CGRectMake(150.f,  100.f, 150.f, 100.f)];
+        SocialPageView* social = (SocialPageView*)[[[NSBundle mainBundle] loadNibNamed:@"SocialPageView" owner:self options:nil] firstObject];
         
-        return  self.alertContentView;
-        
-        
+        [social.facebookButton addTarget:self action:@selector(didTapFacebookButton:) forControlEvents:UIControlEventTouchUpInside];
+        [social.twitterButton addTarget:self action:@selector(didTapTwitterButton:) forControlEvents:UIControlEventTouchUpInside];
+        [social.whatsappButton addTarget:self action:@selector(didTapWhatsappButton:) forControlEvents:UIControlEventTouchUpInside];
+        return  social;
         
     }
     
@@ -195,7 +194,16 @@
 -(BOOL)pagedAlert:(UIView *)view shouldFlipToNextPageFromPage:(NSUInteger)integer{
     NSLog(@"tapped next button alertview teste controller delegate",nil);
     
+    self.shouldAdvancePage = YES;
     return self.shouldAdvancePage;
+}
+
+-(void)pagedAlert:(UIView *)view didTurnToPageAtIndex:(NSUInteger)pageIndex{
+    //
+    if([view isKindOfClass:[SocialPageView class]]){
+        NSLog(@"did turn to social page");
+        
+    }
 }
 
 #pragma mark - UITextFieldDelegate
@@ -204,13 +212,26 @@
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     NSString* fullText = [textField.text stringByAppendingString:string];
     NSLog(@"textfield input: %@", fullText);
-    if([fullText length] == 4){
-        self.shouldAdvancePage = YES;
-    }else{
-        self.shouldAdvancePage = NO;
-    }
+    
     
     return YES;
+}
+
+#pragma mark - Target Selectors
+-(void) didTapFacebookButton:(id)sender{
+    NSLog(@"tapped facebook button");
+    
+    
+}
+
+-(void)didTapTwitterButton:(id)sender{
+    NSLog(@"tapped twitter button");
+    
+}
+
+-(void)didTapWhatsappButton:(id)sender{
+    
+    NSLog(@"tapped whatsapp button");
 }
 
 @end

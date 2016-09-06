@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		756146CF1D7F5021000AD4D2 /* SocialPageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 756146CE1D7F5021000AD4D2 /* SocialPageView.xib */; };
+		756146D21D7F5043000AD4D2 /* SocialPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 756146D11D7F5043000AD4D2 /* SocialPageView.m */; };
 		C42C1E7E1D747FD0004A7357 /* TestPagedAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C42C1E7D1D747FD0004A7357 /* TestPagedAlertViewController.m */; };
 		C44F3D611D6B95A3006C60C9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C44F3D601D6B95A3006C60C9 /* main.m */; };
 		C44F3D641D6B95A3006C60C9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C44F3D631D6B95A3006C60C9 /* AppDelegate.m */; };
@@ -38,6 +40,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		756146CE1D7F5021000AD4D2 /* SocialPageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SocialPageView.xib; sourceTree = "<group>"; };
+		756146D01D7F5043000AD4D2 /* SocialPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocialPageView.h; sourceTree = "<group>"; };
+		756146D11D7F5043000AD4D2 /* SocialPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocialPageView.m; sourceTree = "<group>"; };
 		C42C1E7C1D747FD0004A7357 /* TestPagedAlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestPagedAlertViewController.h; sourceTree = "<group>"; };
 		C42C1E7D1D747FD0004A7357 /* TestPagedAlertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestPagedAlertViewController.m; sourceTree = "<group>"; };
 		C44F3D5C1D6B95A3006C60C9 /* PagedAlertController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PagedAlertController.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -114,6 +119,9 @@
 				C42C1E7C1D747FD0004A7357 /* TestPagedAlertViewController.h */,
 				C42C1E7D1D747FD0004A7357 /* TestPagedAlertViewController.m */,
 				C44F3D681D6B95A3006C60C9 /* Main.storyboard */,
+				756146CE1D7F5021000AD4D2 /* SocialPageView.xib */,
+				756146D01D7F5043000AD4D2 /* SocialPageView.h */,
+				756146D11D7F5043000AD4D2 /* SocialPageView.m */,
 				C4BDE2031D6F9CB8002EA5E7 /* ReusableComponents */,
 				C44F3D6B1D6B95A3006C60C9 /* Assets.xcassets */,
 				C44F3D6D1D6B95A3006C60C9 /* LaunchScreen.storyboard */,
@@ -265,6 +273,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C44F3D6F1D6B95A3006C60C9 /* LaunchScreen.storyboard in Resources */,
+				756146CF1D7F5021000AD4D2 /* SocialPageView.xib in Resources */,
 				C44F3D6C1D6B95A3006C60C9 /* Assets.xcassets in Resources */,
 				C44F3D6A1D6B95A3006C60C9 /* Main.storyboard in Resources */,
 				C4B6175A1D7085B700A36306 /* PagedAlertView.xib in Resources */,
@@ -296,6 +305,7 @@
 				C42C1E7E1D747FD0004A7357 /* TestPagedAlertViewController.m in Sources */,
 				C4BDE2061D6F9D3C002EA5E7 /* PagedAlertView.m in Sources */,
 				C44F3D641D6B95A3006C60C9 /* AppDelegate.m in Sources */,
+				756146D21D7F5043000AD4D2 /* SocialPageView.m in Sources */,
 				C44F3D611D6B95A3006C60C9 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

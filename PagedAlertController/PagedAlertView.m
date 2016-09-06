@@ -25,6 +25,8 @@
     if (self) {
         //Initialization code
         [self setup];
+        //Prevent bad configuration in storyboard
+        [self.innerContentView setAlpha:1];
         
     }
     return self;

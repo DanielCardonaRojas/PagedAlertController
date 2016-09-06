@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ASc-iw-Z7a">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ASc-iw-Z7a">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -78,7 +78,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.65989558334989828" green="1" blue="0.59176144156436927" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="AA6-J9-RZ8" firstAttribute="centerX" secondItem="1iK-Ly-XHO" secondAttribute="centerX" id="HPP-QR-aO0"/>
                             <constraint firstItem="doX-Xw-1xX" firstAttribute="centerX" secondItem="1iK-Ly-XHO" secondAttribute="centerX" id="zKy-Mv-ef1"/>
@@ -106,20 +106,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vvT-84-pha">
-                                <rect key="frame" x="254" y="513" width="94" height="30"/>
-                                <state key="normal" title="Does Nothing"/>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="PagedAlertController Decoration Text" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Do-9J-x6f">
                                 <rect key="frame" x="157" y="33" width="286" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vvT-84-pha">
+                                <rect key="frame" x="258" y="550" width="94" height="30"/>
+                                <state key="normal" title="Does Nothing"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.31979623460000001" green="0.92111113950000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="vvT-84-pha" firstAttribute="centerX" secondItem="Mx6-V4-rxw" secondAttribute="centerX" id="TCV-xc-e4h"/>
+                            <constraint firstItem="vvT-84-pha" firstAttribute="centerX" secondItem="Mx6-V4-rxw" secondAttribute="centerX" id="Epl-Rs-Iln"/>
+                            <constraint firstItem="ENs-1Q-Gyk" firstAttribute="top" secondItem="vvT-84-pha" secondAttribute="bottom" constant="20" id="NLp-LJ-B2P"/>
                             <constraint firstItem="2Do-9J-x6f" firstAttribute="centerX" secondItem="Mx6-V4-rxw" secondAttribute="centerX" id="mDd-UY-xCP"/>
                         </constraints>
                     </view>

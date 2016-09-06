@@ -36,7 +36,7 @@
 @protocol PagedAlertDelegate <NSObject>
 
 @optional
--(void)didTurnToPageAtIndex:(NSUInteger)pageIndex;
+-(void)pagedAlert: (UIView*)view didTurnToPageAtIndex:(NSUInteger)pageIndex;
 -(void)willStartPagedAlertController:(UIViewController*) pagedController;
 -(BOOL)pagedAlert:(UIView*)view shouldFlipToNextPageFromPage:(NSUInteger)integer;
 -(BOOL)pagedAlert: (UIView*)view shouldFlipToPreviousPageFromPage:(NSUInteger)integer;
