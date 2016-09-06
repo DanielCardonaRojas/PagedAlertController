@@ -19,10 +19,10 @@ By itself in only adds navigating functionality, validation and content design i
 @protocol PagedAlertDelegate <NSObject>
 
 @optional
--(void)didTurnToPageAtIndex:(NSUInteger)pageIndex;
+-(void)pagedAlert: (UIView*)view didTurnToPageAtIndex:(NSUInteger)pageIndex;
 -(void)willStartPagedAlertController:(UIViewController*) pagedController;
--(BOOL)pagedAlert:(UIView*)view shouldFlipToNextPageFromPage:(NSUInteger)integer submissionInfo: (NSDictionary*)info;
--(BOOL)pagedAlert: (UIView*)view shouldFlipToPreviousPageFromPage:(NSUInteger)integer submissionInfo: (NSDictionary*)info;
+-(BOOL)pagedAlert:(UIView*)view shouldFlipToNextPageFromPage:(NSUInteger)integer;
+-(BOOL)pagedAlert: (UIView*)view shouldFlipToPreviousPageFromPage:(NSUInteger)integer;
 
 
 -(void)willDismissPagedAlertController;
@@ -34,7 +34,9 @@ By itself in only adds navigating functionality, validation and content design i
 
 -(NSUInteger)numberOfPagesForPagedAlertController: (UIViewController*) pagedController;
 - (UIView *)viewForAlertPage:(NSUInteger)index;
+
 -(NSString*)titleForPageAtIndex:(NSUInteger)index;
+-(BOOL)allowsSwipe;
 
 
 @optional
@@ -42,6 +44,27 @@ By itself in only adds navigating functionality, validation and content design i
 
 -(BOOL)usesWrappAroundIndexing;
 -(BOOL)showsPageBullets;
+-(UIView*)updateViewOnPageFlipForwardRejection:(UIView*)view pageIndex:(NSUInteger)index;
+-(UIView*)updateViewOnPageFlipBackwardRejection:(UIView*)view pageIndex:(NSUInteger)index;
+
+@end
+
+
+@interface PagedAlertViewController : UIViewController
+
+-(void)startPagedAlert;
+-(void)stopPagedAlert;
+-(void)moveToPageAtIndex:(NSUInteger)idx;
+-(void)moveToNextPage;
+-(void)moveToPreviousPage;
+
+@property (strong,nonatomic) UIColor* bulletColor;
+@property (strong,nonatomic) UIColor* pageControlBackgroundColor;
+@property (strong,nonatomic) UIPageControl* pageControl;
+
+
+@property (weak,nonatomic) id<PagedAlertDelegate> delegate;
+@property (weak,nonatomic) id<PagedAlertDataSource> dataSource;
 
 @end
 ```
