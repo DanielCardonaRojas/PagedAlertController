@@ -42,8 +42,9 @@
 -(BOOL)pagedAlert: (UIView*)view shouldFlipToPreviousPageFromPage:(NSUInteger)integer;
 
 
--(void)willDismissPagedAlertController;
--(void)didDismissPagedAlertController;
+//TODO: especify page index where this happens
+-(void)willDismissPagedAlertControllerAtIndex:(NSUInteger)index;
+-(void)didDismissPagedAlertControllerAtIndex:(NSUInteger)index;
 
 @end
 
@@ -53,16 +54,23 @@
 - (UIView *)viewForAlertPage:(NSUInteger)index;
 
 -(NSString*)titleForPageAtIndex:(NSUInteger)index;
+
+
 -(BOOL)allowsSwipe;
 
 
 @optional
 //Change these to properties?
 
+// not usigin wrap around indexing means the PagedViewController will be dismissed if tapping the previous button on first page
+//or the next button on final page.
 -(BOOL)usesWrappAroundIndexing;
 -(BOOL)showsPageBullets;
+//Used to validate input
 -(UIView*)updateViewOnPageFlipForwardRejection:(UIView*)view pageIndex:(NSUInteger)index;
 -(UIView*)updateViewOnPageFlipBackwardRejection:(UIView*)view pageIndex:(NSUInteger)index;
+//An array of strings indicating the button titles for each page (should have equal length to number of pages)
+-(NSArray*)pagedAlertControllerButtonTitles;
 
 @end
 

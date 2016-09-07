@@ -42,8 +42,18 @@
     [self.pageViewController.view removeFromSuperview];
     [self.pageControl removeFromSuperview];
     [self.pageControl setHidden:YES];
+    
+    //Notify delegate about dismissal
+    
+    if([self.delegate respondsToSelector:@selector(willDismissPagedAlertControllerAtIndex:)]){
+        [self.delegate willDismissPagedAlertControllerAtIndex:self.index];
+    }
+    
     [self dismissViewControllerAnimated:YES completion:^{
-//        [self.delegate didDismissPagedAlertController];
+        if ([self.delegate respondsToSelector:@selector(didDismissPagedAlertControllerAtIndex:)]) {
+            [self.delegate didDismissPagedAlertControllerAtIndex:self.index];
+        }
+        
     }];
     
     
@@ -91,7 +101,7 @@
     
     
     
-    //Get inner content for alert view page and configure button actions, title etc.
+    //GET INNER CONTENT FOR ALERT VIEW.
     CGFloat width = self.view.frame.size.width;
    
     CGRect alertFrame = CGRectMake(width/2, 130, 300, 300);
@@ -101,7 +111,7 @@
     
     
     
-    //Configure title
+    //SET PAGE TITLES
     
     if([self.dataSource respondsToSelector:@selector(titleForPageAtIndex:)]){
         NSString* title = [self.dataSource titleForPageAtIndex:index];
@@ -109,12 +119,41 @@
         
     }
     
-    
+    //SET ACTIONS FOR BUTTONS
     [alertView.nextButton addTarget:self action:@selector(tappedNextButton:) forControlEvents:UIControlEventTouchUpInside];
     
     [alertView.previousButton addTarget:self action:@selector(tappedPreviousButton:) forControlEvents:UIControlEventTouchUpInside];
     
     [alertView.closeButton addTarget:self action:@selector(tappedCloseButton:) forControlEvents:UIControlEventTouchUpInside];
+    
+    // SET BUTTON TITLES
+    
+    if ([self.dataSource respondsToSelector:@selector(pagedAlertControllerButtonTitles)]) {
+        NSArray* buttonTitles = [self.dataSource pagedAlertControllerButtonTitles];
+        NSUInteger numberOfTitles = [buttonTitles count];
+        
+        NSUInteger previousTitleIndex = numberOfTitles >= self.pageControl.numberOfPages ? index * 2 : numberOfTitles - 1;
+        previousTitleIndex %= numberOfTitles;
+        NSUInteger nextTitleIndex = (previousTitleIndex + 1) % (numberOfTitles);
+        
+        //TODO: Check for wraparound index
+        
+        NSString* previousButtonTitle = [buttonTitles objectAtIndex:previousTitleIndex];
+        NSString* nextButtonTitle = [buttonTitles objectAtIndex:nextTitleIndex];
+        
+        
+        
+        [alertView.nextButton setTitle:nextButtonTitle forState:UIControlStateNormal];
+        [alertView.previousButton setTitle:previousButtonTitle forState:UIControlStateNormal];
+    }
+    
+    // Disable previous and next button conditionally (notify delegate)
+    
+    if (index == 0 && !self.usesWrappAroundIndexing) {
+        [alertView.previousButton setTintColor:[UIColor redColor]];
+        
+    }
+    
     
     //TODO: Add user supplied content cell to alert page
     
@@ -215,7 +254,11 @@
 
 #pragma mark - PageController Actions 
 -(void)moveToNextPage{
+    // Moving from last page?
+    
     UIViewController* nextPage = [self contentPageControllerAtIndex:self.index + 1];
+    
+    
     //Notify delegate movement to next page
     if([self.delegate respondsToSelector:@selector(pagedAlert:didTurnToPageAtIndex:)]){
         [self.delegate pagedAlert:self.currentPageContentView didTurnToPageAtIndex:self.index];
@@ -338,15 +381,18 @@
 //TODO: Notify delegate when buttons get tapped passing index
 -(IBAction)tappedCloseButton:(id)sender{
     
-    if([self.delegate respondsToSelector:@selector(willDismissPagedAlertController)]){
-        [self.delegate willDismissPagedAlertController];
-    }
     [self stopPagedAlert];
     
 }
 
 -(IBAction)tappedNextButton:(id)sender{
     
+    //if in last page and no wrap around indexing dismiss
+    if (self.index == self.pageControl.numberOfPages - 1 && !self.usesWrappAroundIndexing) {
+        [self stopPagedAlert];
+        return;
+       
+    }
     
     if([self.delegate respondsToSelector:@selector(pagedAlert:shouldFlipToNextPageFromPage:)]){
         
@@ -371,6 +417,12 @@
 }
 
 -(IBAction)tappedPreviousButton:(id)sender{
+    
+    //if in first page and no wrap around indexing dismiss
+    if (self.index == 0 && !self.usesWrappAroundIndexing) {
+        [self stopPagedAlert];
+        return;
+    }
         
     if([self.delegate respondsToSelector:@selector(pagedAlert:shouldFlipToPreviousPageFromPage:)]){
         
@@ -455,7 +507,7 @@
 }
 
 -(BOOL)usesWrappAroundIndexing{
-    return YES;
+    return NO;
 }
 
 -(BOOL)allowsSwipe{
