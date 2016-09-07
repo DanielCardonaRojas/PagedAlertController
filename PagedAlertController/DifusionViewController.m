@@ -9,14 +9,17 @@
 #import "DifusionViewController.h"
 #import "SocialPageView.h"
 
+
 @interface DifusionViewController ()
 
+@property (strong,nonatomic) PagedAlertViewController* pagedAlert;
 @end
 
 @implementation DifusionViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     // Do any additional setup after loading the view.
 }
 
@@ -31,6 +34,8 @@
     
     [pagedAlert setDelegate:self];
     [pagedAlert setDataSource:self];
+    
+    self.pagedAlert = pagedAlert;
 }
 
 
@@ -40,10 +45,6 @@
     
 }
 
-- (IBAction)pagedAlertFacebookTapped:(id)sender {
-    
-    NSLog(@"tapped facebook button");
-}
 
 #pragma mark - PagedAlertDataSource
 
@@ -168,17 +169,64 @@
 
 #pragma mark - Target Selectors
 -(void) didTapFacebookButton:(id)sender{
-    NSLog(@"tapped facebook button");
+    [self.pagedAlert dismissViewControllerAnimated:YES completion:^{
+        //Present Facebook compose controller
+        if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]) {
+            SLComposeViewController *tweetComposer = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
+            [tweetComposer setInitialText:@"texto a postear"];
+            //tweetComposer addImage filapp
+            
+            [self presentViewController:tweetComposer animated:YES completion:nil];
+        }else{
+            //Present alert
+            UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Facebook no disponible" message:@"Por favor vaya a Ajustes > Facebok para configurar su cuenta " preferredStyle:UIAlertControllerStyleAlert];
+            
+            [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+            [self presentViewController:alert animated:YES completion:nil];
+            
+        }
+    }];
     
 }
 
 -(void)didTapTwitterButton:(id)sender{
     NSLog(@"tapped twitter button");
     
+    [self.pagedAlert dismissViewControllerAnimated:YES completion:^{
+        //Present Twitter compose controller
+        if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter]) {
+            SLComposeViewController *tweetComposer = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
+            [tweetComposer setInitialText:@"texto a postear"];
+            //tweetComposer addImage filapp
+            
+            [self presentViewController:tweetComposer animated:YES completion:nil];
+        }else{
+            //Present alert
+            UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Twitter no disponible" message:@"Por favor vaya a Ajustes > Twitter para configurar su cuenta " preferredStyle:UIAlertControllerStyleAlert];
+            
+            [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+            [self presentViewController:alert animated:YES completion:nil];
+            
+        }
+    }];
+    
+    
+    
+    
+    
 }
 
 -(void)didTapWhatsappButton:(id)sender{
+    /* 
+     Be sure to include WhatsApp URL scheme in your application's Info.plist under LSApplicationQueriesSchemes key 
+     if you want to query presence of WhatsApp on user's iPhone using -[UIApplication canOpenURL:].
+     */
+    NSString* formattedMessage = [NSString stringWithFormat: @"whatsapp://send?text=%@", @"Descarga whatsapp"];
     
+    NSURL *whatsappURL = [NSURL URLWithString:formattedMessage];
+    if ([[UIApplication sharedApplication] canOpenURL: whatsappURL]) {
+        [[UIApplication sharedApplication] openURL: whatsappURL];
+    }
     NSLog(@"tapped whatsapp button");
 }
 

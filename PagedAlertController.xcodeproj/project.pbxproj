@@ -20,6 +20,7 @@
 		C44F3D851D6B95A3006C60C9 /* PagedAlertControllerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = C44F3D841D6B95A3006C60C9 /* PagedAlertControllerUITests.m */; };
 		C4B6175A1D7085B700A36306 /* PagedAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4B617591D7085B700A36306 /* PagedAlertView.xib */; };
 		C4BDE2061D6F9D3C002EA5E7 /* PagedAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BDE2051D6F9D3C002EA5E7 /* PagedAlertView.m */; };
+		C4CC50E01D805E7F00DD7D31 /* DifusionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4CC50DF1D805E7F00DD7D31 /* DifusionViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,8 @@
 		C4B617591D7085B700A36306 /* PagedAlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PagedAlertView.xib; path = ../PagedAlertView.xib; sourceTree = "<group>"; };
 		C4BDE2041D6F9D3C002EA5E7 /* PagedAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PagedAlertView.h; sourceTree = "<group>"; };
 		C4BDE2051D6F9D3C002EA5E7 /* PagedAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PagedAlertView.m; sourceTree = "<group>"; };
+		C4CC50DE1D805E7F00DD7D31 /* DifusionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DifusionViewController.h; sourceTree = "<group>"; };
+		C4CC50DF1D805E7F00DD7D31 /* DifusionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DifusionViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +125,8 @@
 				756146CE1D7F5021000AD4D2 /* SocialPageView.xib */,
 				756146D01D7F5043000AD4D2 /* SocialPageView.h */,
 				756146D11D7F5043000AD4D2 /* SocialPageView.m */,
+				C4CC50DE1D805E7F00DD7D31 /* DifusionViewController.h */,
+				C4CC50DF1D805E7F00DD7D31 /* DifusionViewController.m */,
 				C4BDE2031D6F9CB8002EA5E7 /* ReusableComponents */,
 				C44F3D6B1D6B95A3006C60C9 /* Assets.xcassets */,
 				C44F3D6D1D6B95A3006C60C9 /* LaunchScreen.storyboard */,
@@ -301,6 +306,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C4CC50E01D805E7F00DD7D31 /* DifusionViewController.m in Sources */,
 				C44F3D671D6B95A3006C60C9 /* PagedAlertViewController.m in Sources */,
 				C42C1E7E1D747FD0004A7357 /* TestPagedAlertViewController.m in Sources */,
 				C4BDE2061D6F9D3C002EA5E7 /* PagedAlertView.m in Sources */,
