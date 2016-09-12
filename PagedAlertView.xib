@@ -9,6 +9,7 @@
             <connections>
                 <outlet property="closeButton" destination="zzj-rt-Pn2" id="Td9-Gv-ADq"/>
                 <outlet property="innerContentView" destination="prG-bT-Saa" id="nZP-Z8-jEL"/>
+                <outlet property="innerview" destination="iN0-l3-epB" id="ViK-0I-ORs"/>
                 <outlet property="nextButton" destination="nCo-x9-uTu" id="qXH-EE-6JW"/>
                 <outlet property="previousButton" destination="5LH-jX-uq4" id="zJs-EF-3E3"/>
                 <outlet property="titleLabel" destination="a0D-Dg-06V" id="AwU-Yh-9B4"/>
@@ -19,34 +20,41 @@
             <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5LH-jX-uq4">
-                    <rect key="frame" x="0.0" y="253" width="143" height="47"/>
-                    <state key="normal" title="Previous"/>
-                </button>
-                <view autoresizesSubviews="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="prG-bT-Saa">
-                    <rect key="frame" x="0.0" y="54" width="300" height="200"/>
-                    <color key="backgroundColor" red="0.85606866273996507" green="0.85606866273996507" blue="0.85606866273996507" alpha="1" colorSpace="calibratedRGB"/>
+                <view autoresizesSubviews="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="prG-bT-Saa">
+                    <rect key="frame" x="0.0" y="50" width="300" height="200"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Lorem ipsum dolor sit amet, consetetur" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a0D-Dg-06V">
-                    <rect key="frame" x="8" y="8" width="247" height="38"/>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zzj-rt-Pn2">
+                    <rect key="frame" x="260" y="15" width="24" height="24"/>
+                    <state key="normal" image="close_button.png"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5LH-jX-uq4">
+                    <rect key="frame" x="8" y="252" width="143" height="48"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <state key="normal" title="Previous">
+                        <color key="titleColor" red="0.12512415687497536" green="0.46896030912798714" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Lorem ipsum dolor sit amet, consetetur" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a0D-Dg-06V">
+                    <rect key="frame" x="44" y="8" width="213" height="38"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nCo-x9-uTu">
-                    <rect key="frame" x="157" y="254" width="143" height="47"/>
-                    <state key="normal" title="Next"/>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zzj-rt-Pn2">
-                    <rect key="frame" x="263" y="16" width="22" height="22"/>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nCo-x9-uTu">
+                    <rect key="frame" x="159" y="252" width="133" height="48"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <state key="normal" title="Next">
+                        <color key="titleColor" red="0.085582076815648334" green="0.44749362098120493" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
                 </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-            <constraints>
-                <constraint firstItem="prG-bT-Saa" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="YWd-8T-veg"/>
-            </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="357" y="301"/>
         </view>
     </objects>
+    <resources>
+        <image name="close_button.png" width="32" height="32"/>
+    </resources>
 </document>

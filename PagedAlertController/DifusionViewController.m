@@ -68,8 +68,10 @@
     }
     
     if(index == 1){
-        [social.messageLabel setText:@"Regalale Filapp a tus seres queridos"];
+        [social.messageLabel setText:@"Quieres regalarle Filapp a un amigo o familiar? Enviales un mensaje a traves de uno de los siguientes canales:"];
     }
+    
+    
     return  social;
 
 }
@@ -110,9 +112,44 @@
     return title;
 }
 
+-(UIColor *)titleColorForPageAtIndex:(NSUInteger)index{
+    return [UIColor colorWithRed:(255.f/255.f) green:(120.f/250.f) blue:(31/250.f) alpha:1];
+}
+
+
 -(NSArray *)pagedAlertControllerButtonTitles{
     
     NSArray* array = @[@"No me gusto",@"Si me gusto",@"Anterior",@"Finalizar"];
+    
+    return array;
+}
+
+-(NSArray *)pagedAlertControllerButtonIcons{
+    
+    UIImage* likeIcon = [UIImage imageNamed:@"like.png"];
+    UIImage* dislikeIcon = [UIImage imageNamed:@"dislike.png"];
+    UIImage* nextArrow = [UIImage imageNamed:@"right-arrow.png"];
+    UIImage* previousArrow = [UIImage imageNamed:@"left-arrow.png"];
+    
+    
+    //Resize programmatically
+    CGSize destinationSize = CGSizeMake(24, 24);
+    
+    UIGraphicsBeginImageContext(destinationSize);
+    [likeIcon drawInRect:CGRectMake(0,0,destinationSize.width,destinationSize.height)];
+    UIImage *newLikeIcon = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    UIGraphicsBeginImageContext(destinationSize);
+    [dislikeIcon drawInRect:CGRectMake(0,0,destinationSize.width,destinationSize.height)];
+    UIImage *newDislikeIcon = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+
+    
+    
+    NSArray* array = @[newDislikeIcon, newLikeIcon];
+    
     
     return array;
 }
@@ -157,6 +194,14 @@
     }
 }
 
+-(BOOL)shouldReverseNextButtonLayout:(NSUInteger)index{
+    if (index == 1) {
+        return YES;
+    }
+    
+    return NO;
+}
+
 #pragma mark - UITextFieldDelegate
 
 
@@ -172,11 +217,24 @@
     [self.pagedAlert dismissViewControllerAnimated:YES completion:^{
         //Present Facebook compose controller
         if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]) {
-            SLComposeViewController *tweetComposer = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
-            [tweetComposer setInitialText:@"texto a postear"];
-            //tweetComposer addImage filapp
+            SLComposeViewController *facebookComposer = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
+            [facebookComposer setInitialText:@"texto a postear"];
+            //TODO: change url depending on language
+            [facebookComposer addURL:[NSURL URLWithString:@"https://www.youtube.com/watch?v=rosRxrPupF4"]];
+            [facebookComposer addImage:[UIImage imageNamed:@"filapp_beta_58.png"]];
+            [facebookComposer setCompletionHandler:^(SLComposeViewControllerResult result){
+                
+                if (result == SLComposeViewControllerResultDone) {
+                    //TODO: Count user interaction
+                    
+                    
+                }
+                
+                
+            }];
+            //TODO: Since facebook doesnt allow prefilling Present alert if user taps ok yank to UIPasteBoard
             
-            [self presentViewController:tweetComposer animated:YES completion:nil];
+            [self presentViewController:facebookComposer animated:YES completion:nil];
         }else{
             //Present alert
             UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Facebook no disponible" message:@"Por favor vaya a Ajustes > Facebok para configurar su cuenta " preferredStyle:UIAlertControllerStyleAlert];
@@ -190,14 +248,25 @@
 }
 
 -(void)didTapTwitterButton:(id)sender{
-    NSLog(@"tapped twitter button");
     
     [self.pagedAlert dismissViewControllerAnimated:YES completion:^{
         //Present Twitter compose controller
         if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter]) {
             SLComposeViewController *tweetComposer = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
             [tweetComposer setInitialText:@"texto a postear"];
-            //tweetComposer addImage filapp
+            //TODO: change url depending on language
+            [tweetComposer addURL:[NSURL URLWithString:@"https://www.youtube.com/watch?v=rosRxrPupF4"]];
+            [tweetComposer addImage:[UIImage imageNamed:@"filapp_beta_58.png"]];
+            [tweetComposer setCompletionHandler:^(SLComposeViewControllerResult result){
+                
+                if (result == SLComposeViewControllerResultDone) {
+                    //TODO: Count user interaction
+                    
+                    
+                }
+                
+                
+            }];
             
             [self presentViewController:tweetComposer animated:YES completion:nil];
         }else{
@@ -221,13 +290,49 @@
      Be sure to include WhatsApp URL scheme in your application's Info.plist under LSApplicationQueriesSchemes key 
      if you want to query presence of WhatsApp on user's iPhone using -[UIApplication canOpenURL:].
      */
+    [self.pagedAlert dismissViewControllerAnimated:YES completion:^{
     NSString* formattedMessage = [NSString stringWithFormat: @"whatsapp://send?text=%@", @"Descarga whatsapp"];
-    
+
+        
+    formattedMessage = [formattedMessage stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     NSURL *whatsappURL = [NSURL URLWithString:formattedMessage];
+        
+//        NSURL *whatsappURL = [NSURL URLWithString:@"whatsapp://send?text=Hello%2C%20World!"];
     if ([[UIApplication sharedApplication] canOpenURL: whatsappURL]) {
         [[UIApplication sharedApplication] openURL: whatsappURL];
+//        [self sendWhatsAppMedia];
+    }else {
+        //Present alert
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Whatsapp no disponible" message:@"Ud no tiene whatsapp instalado" preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+        [self presentViewController:alert animated:YES completion:nil];
     }
+    //Send video
+
+    }];
+    
     NSLog(@"tapped whatsapp button");
+}
+
+
+-(void)sendWhatsAppMedia{
+    
+    if ([[UIApplication sharedApplication] canOpenURL: [NSURL URLWithString:@"whatsapp://app"]]){
+        
+        NSString *savePath = [[NSBundle mainBundle] pathForResource:@"filapp_beta_58" ofType:@"png"];
+        
+        UIDocumentInteractionController* documentInteractionController = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:savePath]];
+        
+        documentInteractionController.UTI = @"net.whatsapp.images";
+        
+        documentInteractionController.delegate = (id)self;
+        
+        [documentInteractionController presentOpenInMenuFromRect:CGRectMake(0, 0, 0, 0) inView:self.view animated: YES];
+    } else {
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Whatsapp no disponible" message:@"Ud no tiene whatsapp instalado" preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
 }
 
 

@@ -9,7 +9,7 @@
 #import "PagedAlertView.h"
 
 @interface PagedAlertView ()
-@property (weak,nonatomic) UIView* innerview;
+@property (weak,nonatomic) IBOutlet UIView* innerview;
 
 
 
@@ -27,6 +27,7 @@
         [self setup];
         //Prevent bad configuration in storyboard
         [self.innerContentView setAlpha:1];
+
         
     }
     return self;
@@ -45,9 +46,39 @@
     self.innerview.frame = self.bounds;
     self.innerview.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     [self.innerview.layer setCornerRadius:20.0f];
+    [self addSubview:self.innerview];
+    [self.nextButton.titleLabel setFont:[UIFont systemFontOfSize:15.f]];
+    [self.previousButton.titleLabel setFont:[UIFont systemFontOfSize:15.f]];
     
-    [self addSubview:_innerview];
+    //TODO: Set Constraints
     
+    [self.nextButton setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 15.f)];
+    [self.previousButton setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 15.f)];
+    
+    
+//    CALayer *upperBorder = [CALayer layer];
+//    upperBorder.backgroundColor = [[UIColor greenColor] CGColor];
+    
+//    upperBorder.frame = CGRectMake(0, 0, CGRectGetWidth(self.frame), 1.0f);
+//    [self.innerContentView.layer addSublayer:upperBorder];
+    
+    
+    [self.innerContentView.layer setBorderColor:[UIColor lightGrayColor].CGColor];
+    [self.innerContentView.layer setBorderWidth:1.0f];
+    [self.innerContentView.layer setContentsRect:CGRectMake(-2, 50, 305, 305)];
+    [self.innerview setClipsToBounds:NO];
+
+    
+//    UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+//    UIVisualEffectView *blurView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+//    blurView.clipsToBounds = YES;
+//    blurView.frame = self.innerview.bounds;
+//    blurView.layer.borderColor = [[UIColor blackColor] colorWithAlphaComponent:0.4f].CGColor;
+//    blurView.layer.borderWidth = 1.0;
+//    blurView.layer.cornerRadius = 20.0f;
+//    [blurView.contentView addSubview:self.innerview];
+//    [self insertSubview:blurView atIndex:0];
+//    
     
 }
 -(UIView*)loadFromNib{
@@ -56,5 +87,7 @@
     UIView* view = [[nib instantiateWithOwner:self options:nil] firstObject];
     return view;
 }
+
+
 
 @end

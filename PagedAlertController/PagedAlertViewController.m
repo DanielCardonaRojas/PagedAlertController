@@ -91,7 +91,7 @@
     UIViewController* pageContentController = [[UIViewController alloc]init];
     [pageContentController.view setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.5]];
     
-    //Add Tap Gesture Recognizer
+    //ADD A TAP GESTURE RECOGNIZER
     
     UITapGestureRecognizer* tapRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didTapPage:)];
     [tapRecognizer setNumberOfTapsRequired:1];
@@ -107,6 +107,8 @@
     CGRect alertFrame = CGRectMake(width/2, 130, 300, 300);
     
     PagedAlertView* alertView = [[PagedAlertView alloc]initWithFrame:alertFrame];
+//    PagedAlertView* alertView = [[PagedAlertView alloc] init];
+//    [alertView setFrame:alertFrame];
     alertView.center = self.view.center;
     
     
@@ -119,6 +121,13 @@
         
     }
     
+    if([self.dataSource respondsToSelector:@selector(titleColorForPageAtIndex:)]){
+        UIColor* titleColor = [self.dataSource titleColorForPageAtIndex:index];
+        [alertView.titleLabel setTextColor:titleColor];
+    }
+    
+    
+    
     //SET ACTIONS FOR BUTTONS
     [alertView.nextButton addTarget:self action:@selector(tappedNextButton:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -126,7 +135,7 @@
     
     [alertView.closeButton addTarget:self action:@selector(tappedCloseButton:) forControlEvents:UIControlEventTouchUpInside];
     
-    // SET BUTTON TITLES
+    // SET BUTTON TITLES AND IMAGES
     
     if ([self.dataSource respondsToSelector:@selector(pagedAlertControllerButtonTitles)]) {
         NSArray* buttonTitles = [self.dataSource pagedAlertControllerButtonTitles];
@@ -142,10 +151,46 @@
         NSString* nextButtonTitle = [buttonTitles objectAtIndex:nextTitleIndex];
         
         
-        
         [alertView.nextButton setTitle:nextButtonTitle forState:UIControlStateNormal];
         [alertView.previousButton setTitle:previousButtonTitle forState:UIControlStateNormal];
     }
+    
+    //Button images
+    
+    if ([self.dataSource respondsToSelector:@selector(pagedAlertControllerButtonIcons)]) {
+        NSArray* buttonIcons = [self.dataSource pagedAlertControllerButtonIcons];
+        NSUInteger numberOfTitles = [buttonIcons count];
+        NSUInteger previousButtonIndex = index * 2;
+        
+        if(previousButtonIndex + 1 <= numberOfTitles - 1){
+            UIImage* previousIcon = (UIImage*)[buttonIcons objectAtIndex:previousButtonIndex];
+            UIImage* nextIcon = (UIImage*)[buttonIcons objectAtIndex:previousButtonIndex + 1];
+            [alertView.previousButton setImage:previousIcon forState:UIControlStateNormal];
+            [alertView.nextButton setImage:nextIcon forState:UIControlStateNormal];
+            
+        }else{
+            [alertView.previousButton setImage:nil forState:UIControlStateNormal];
+            [alertView.nextButton setImage:nil forState:UIControlStateNormal];
+        }
+        
+    }
+    
+    
+    //SHOULD SWAP BUTTON LAYOUT (IMAGE, TEXT)
+    if ([self.delegate respondsToSelector:@selector(shouldReversePreviousButtonLayout:)]) {
+        BOOL reversesPreviousButtonLayout = [self.delegate shouldReverseNextButtonLayout:index];
+        if(reversesPreviousButtonLayout)
+            alertView.previousButton = [self buttonWithImageToRight:alertView.previousButton];
+        
+    }
+    
+    if ([self.delegate respondsToSelector:@selector(shouldReverseNextButtonLayout:)]) {
+        BOOL reversesNextButtonLayout = [self.delegate shouldReverseNextButtonLayout:index];
+        if(reversesNextButtonLayout)
+            alertView.nextButton = [self buttonWithImageToRight:alertView.nextButton];
+        
+    }
+    
     
     // Disable previous and next button conditionally (notify delegate)
     
@@ -176,10 +221,10 @@
 //    [contentView didMoveToSuperview];
     
     
-    NSLog(@"PageController center: %f %f", pageContentController.view.center.x,pageContentController.view.center.y);
-    NSLog(@"Content center: %f %f", contentView.center.x,contentView.center.y);
-    NSLog(@"Container center: %f %f", contentView.superview.center.x,contentView.superview.center.y);
-    NSLog(@"Superview description %@",[[contentView superview] description]);
+//    NSLog(@"PageController center: %f %f", pageContentController.view.center.x,pageContentController.view.center.y);
+//    NSLog(@"Content center: %f %f", contentView.center.x,contentView.center.y);
+//    NSLog(@"Container center: %f %f", contentView.superview.center.x,contentView.superview.center.y);
+//    NSLog(@"Superview description %@",[[contentView superview] description]);
     
     
     self.currentPageContentView = contentView;
@@ -199,9 +244,10 @@
     [self.view setBackgroundColor:[UIColor clearColor]];
     
     
-    //Init variables
-    self.index = 0;    
-    //Create a page a view controller
+    //INIT VARIABLES
+    self.index = 0;
+    
+    //CREATE a UIPAGEVIEWCONTROLLER
     self.pageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
     
     
@@ -217,7 +263,7 @@
     [self.pageViewController setDelegate:self];
     
   
-    // Create page view controller
+    // CREATE A CONTENT PAGE VIEW CONTROLLER
     UIViewController *startingViewController = [self contentPageControllerAtIndex:self.index];
     
     NSArray *viewControllers = @[startingViewController];
@@ -242,7 +288,7 @@
     
     
     
-    //Modify View appearance
+    //MODIFY VIEW APPEARANCE
     UIColor* transparentColor = [UIColor colorWithRed:0.f green:0.f blue:0.f alpha:0];
     
     [self.pageViewController.view setBackgroundColor:transparentColor];
@@ -319,6 +365,13 @@
     }
     return _bulletColor;
 }
+
+//-(UIColor*)titleColor{
+//    if(!_titleColor){
+//        _titleColor = [UIColor blackColor];
+//    }
+//    return _titleColor;
+//}
 
 
 
@@ -454,6 +507,17 @@
     }
 }
 
+
+#pragma mark - Utilities and Helpers
+
+-(UIButton*)buttonWithImageToRight:(UIButton*)button{
+    
+    button.transform = CGAffineTransformMakeScale(-1.0, 1.0);
+    button.titleLabel.transform = CGAffineTransformMakeScale(-1.0, 1.0);
+    button.imageView.transform = CGAffineTransformMakeScale(-1.0, 1.0);
+    
+    return button;
+}
 
 /*=================== DEFAULT/EXAMPLE IMPLEMENTATION DATASOURCE AND DELEGATE ============================= */
 

@@ -33,6 +33,8 @@
 */
 
 //TODO: Subclass UIViewController and change respective protocol method parameters
+
+/* -------------------------- DELEGATE ------------------------- */
 @protocol PagedAlertDelegate <NSObject>
 
 @optional
@@ -46,11 +48,18 @@
 -(void)willDismissPagedAlertControllerAtIndex:(NSUInteger)index;
 -(void)didDismissPagedAlertControllerAtIndex:(NSUInteger)index;
 
+
+-(BOOL)shouldReversePreviousButtonLayout:(NSUInteger)index;
+-(BOOL)shouldReverseNextButtonLayout:(NSUInteger)index;
+
 @end
 
+/* -------------------------- DATA SOURCE ------------------------- */
 @protocol PagedAlertDataSource <NSObject>
 
 -(NSUInteger)numberOfPagesForPagedAlertController: (UIViewController*) pagedController;
+
+//TODO: generalize so the PagedAertView can have a varying size viewForAlertPage:(NSInteger)index contentDimension:(CGRect) frame;
 - (UIView *)viewForAlertPage:(NSUInteger)index;
 
 -(NSString*)titleForPageAtIndex:(NSUInteger)index;
@@ -62,19 +71,21 @@
 @optional
 //Change these to properties?
 
-// not usigin wrap around indexing means the PagedViewController will be dismissed if tapping the previous button on first page
+// Not usigin wrap around indexing means the PagedViewController will be dismissed if tapping the previous button on first page
 //or the next button on final page.
 -(BOOL)usesWrappAroundIndexing;
 -(BOOL)showsPageBullets;
 //Used to validate input
 -(UIView*)updateViewOnPageFlipForwardRejection:(UIView*)view pageIndex:(NSUInteger)index;
 -(UIView*)updateViewOnPageFlipBackwardRejection:(UIView*)view pageIndex:(NSUInteger)index;
+-(UIColor*)titleColorForPageAtIndex:(NSUInteger)index;
 //An array of strings indicating the button titles for each page (should have equal length to number of pages)
 -(NSArray*)pagedAlertControllerButtonTitles;
+-(NSArray*)pagedAlertControllerButtonIcons;
 
 @end
 
-
+/* -------------------------- INTERFACE ------------------------- */
 @interface PagedAlertViewController : UIViewController
 
 -(void)startPagedAlert;

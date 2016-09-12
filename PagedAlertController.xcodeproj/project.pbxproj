@@ -18,9 +18,18 @@
 		C44F3D6F1D6B95A3006C60C9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C44F3D6D1D6B95A3006C60C9 /* LaunchScreen.storyboard */; };
 		C44F3D7A1D6B95A3006C60C9 /* PagedAlertControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C44F3D791D6B95A3006C60C9 /* PagedAlertControllerTests.m */; };
 		C44F3D851D6B95A3006C60C9 /* PagedAlertControllerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = C44F3D841D6B95A3006C60C9 /* PagedAlertControllerUITests.m */; };
+		C4A6AC281D835F9C0015D197 /* Facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = C4A6AC251D835F9C0015D197 /* Facebook.png */; };
+		C4A6AC291D835F9C0015D197 /* Twitter.png in Resources */ = {isa = PBXBuildFile; fileRef = C4A6AC261D835F9C0015D197 /* Twitter.png */; };
+		C4A6AC2A1D835F9C0015D197 /* WhatsApp.png in Resources */ = {isa = PBXBuildFile; fileRef = C4A6AC271D835F9C0015D197 /* WhatsApp.png */; };
+		C4A6AC2C1D835FE10015D197 /* filapp_beta_58.png in Resources */ = {isa = PBXBuildFile; fileRef = C4A6AC2B1D835FE10015D197 /* filapp_beta_58.png */; };
 		C4B6175A1D7085B700A36306 /* PagedAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4B617591D7085B700A36306 /* PagedAlertView.xib */; };
 		C4BDE2061D6F9D3C002EA5E7 /* PagedAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BDE2051D6F9D3C002EA5E7 /* PagedAlertView.m */; };
 		C4CC50E01D805E7F00DD7D31 /* DifusionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4CC50DF1D805E7F00DD7D31 /* DifusionViewController.m */; };
+		C4E9FB0A1D86F90D001952D7 /* close_button.png in Resources */ = {isa = PBXBuildFile; fileRef = C4E9FB091D86F90D001952D7 /* close_button.png */; };
+		C4E9FB111D870C61001952D7 /* dislike.png in Resources */ = {isa = PBXBuildFile; fileRef = C4E9FB0F1D870C61001952D7 /* dislike.png */; };
+		C4E9FB121D870C61001952D7 /* like.png in Resources */ = {isa = PBXBuildFile; fileRef = C4E9FB101D870C61001952D7 /* like.png */; };
+		C4E9FB191D871EBC001952D7 /* left-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = C4E9FB171D871EBC001952D7 /* left-arrow.png */; };
+		C4E9FB1A1D871EBC001952D7 /* right-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = C4E9FB181D871EBC001952D7 /* right-arrow.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,11 +71,20 @@
 		C44F3D801D6B95A3006C60C9 /* PagedAlertControllerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PagedAlertControllerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C44F3D841D6B95A3006C60C9 /* PagedAlertControllerUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PagedAlertControllerUITests.m; sourceTree = "<group>"; };
 		C44F3D861D6B95A3006C60C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C4A6AC251D835F9C0015D197 /* Facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Facebook.png; sourceTree = "<group>"; };
+		C4A6AC261D835F9C0015D197 /* Twitter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Twitter.png; sourceTree = "<group>"; };
+		C4A6AC271D835F9C0015D197 /* WhatsApp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WhatsApp.png; sourceTree = "<group>"; };
+		C4A6AC2B1D835FE10015D197 /* filapp_beta_58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = filapp_beta_58.png; sourceTree = "<group>"; };
 		C4B617591D7085B700A36306 /* PagedAlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PagedAlertView.xib; path = ../PagedAlertView.xib; sourceTree = "<group>"; };
 		C4BDE2041D6F9D3C002EA5E7 /* PagedAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PagedAlertView.h; sourceTree = "<group>"; };
 		C4BDE2051D6F9D3C002EA5E7 /* PagedAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PagedAlertView.m; sourceTree = "<group>"; };
 		C4CC50DE1D805E7F00DD7D31 /* DifusionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DifusionViewController.h; sourceTree = "<group>"; };
 		C4CC50DF1D805E7F00DD7D31 /* DifusionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DifusionViewController.m; sourceTree = "<group>"; };
+		C4E9FB091D86F90D001952D7 /* close_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close_button.png; sourceTree = "<group>"; };
+		C4E9FB0F1D870C61001952D7 /* dislike.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dislike.png; sourceTree = "<group>"; };
+		C4E9FB101D870C61001952D7 /* like.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = like.png; sourceTree = "<group>"; };
+		C4E9FB171D871EBC001952D7 /* left-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "left-arrow.png"; sourceTree = "<group>"; };
+		C4E9FB181D871EBC001952D7 /* right-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "right-arrow.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +115,15 @@
 		C44F3D531D6B95A3006C60C9 = {
 			isa = PBXGroup;
 			children = (
+				C4A6AC251D835F9C0015D197 /* Facebook.png */,
+				C4A6AC261D835F9C0015D197 /* Twitter.png */,
+				C4A6AC271D835F9C0015D197 /* WhatsApp.png */,
+				C4A6AC2B1D835FE10015D197 /* filapp_beta_58.png */,
+				C4E9FB091D86F90D001952D7 /* close_button.png */,
+				C4E9FB0F1D870C61001952D7 /* dislike.png */,
+				C4E9FB101D870C61001952D7 /* like.png */,
+				C4E9FB171D871EBC001952D7 /* left-arrow.png */,
+				C4E9FB181D871EBC001952D7 /* right-arrow.png */,
 				C44F3D5E1D6B95A3006C60C9 /* PagedAlertController */,
 				C44F3D781D6B95A3006C60C9 /* PagedAlertControllerTests */,
 				C44F3D831D6B95A3006C60C9 /* PagedAlertControllerUITests */,
@@ -241,6 +268,7 @@
 				TargetAttributes = {
 					C44F3D5B1D6B95A3006C60C9 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = QYM4DN46P5;
 					};
 					C44F3D741D6B95A3006C60C9 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -277,11 +305,20 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C4E9FB1A1D871EBC001952D7 /* right-arrow.png in Resources */,
+				C4A6AC2C1D835FE10015D197 /* filapp_beta_58.png in Resources */,
 				C44F3D6F1D6B95A3006C60C9 /* LaunchScreen.storyboard in Resources */,
+				C4E9FB0A1D86F90D001952D7 /* close_button.png in Resources */,
 				756146CF1D7F5021000AD4D2 /* SocialPageView.xib in Resources */,
 				C44F3D6C1D6B95A3006C60C9 /* Assets.xcassets in Resources */,
+				C4A6AC281D835F9C0015D197 /* Facebook.png in Resources */,
+				C4A6AC291D835F9C0015D197 /* Twitter.png in Resources */,
 				C44F3D6A1D6B95A3006C60C9 /* Main.storyboard in Resources */,
+				C4E9FB121D870C61001952D7 /* like.png in Resources */,
 				C4B6175A1D7085B700A36306 /* PagedAlertView.xib in Resources */,
+				C4E9FB191D871EBC001952D7 /* left-arrow.png in Resources */,
+				C4E9FB111D870C61001952D7 /* dislike.png in Resources */,
+				C4A6AC2A1D835F9C0015D197 /* WhatsApp.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -455,10 +492,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = PagedAlertController/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.decaroj.PagedAlertController;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -466,10 +506,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = PagedAlertController/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.decaroj.PagedAlertController;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
