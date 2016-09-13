@@ -16,6 +16,7 @@ By itself in only adds navigating functionality, validation and content design i
 
 
 ``` objective-c
+/* -------------------------- DELEGATE ------------------------- */
 @protocol PagedAlertDelegate <NSObject>
 
 @optional
@@ -29,11 +30,18 @@ By itself in only adds navigating functionality, validation and content design i
 -(void)willDismissPagedAlertControllerAtIndex:(NSUInteger)index;
 -(void)didDismissPagedAlertControllerAtIndex:(NSUInteger)index;
 
+
+-(BOOL)shouldReversePreviousButtonLayout:(NSUInteger)index;
+-(BOOL)shouldReverseNextButtonLayout:(NSUInteger)index;
+
 @end
 
+/* -------------------------- DATA SOURCE ------------------------- */
 @protocol PagedAlertDataSource <NSObject>
 
 -(NSUInteger)numberOfPagesForPagedAlertController: (UIViewController*) pagedController;
+
+//TODO: generalize so the PagedAertView can have a varying size viewForAlertPage:(NSInteger)index contentDimension:(CGRect) frame;
 - (UIView *)viewForAlertPage:(NSUInteger)index;
 
 -(NSString*)titleForPageAtIndex:(NSUInteger)index;
@@ -45,19 +53,21 @@ By itself in only adds navigating functionality, validation and content design i
 @optional
 //Change these to properties?
 
-// not usigin wrap around indexing means the PagedViewController will be dismissed if tapping the previous button on first page
+// Not usigin wrap around indexing means the PagedViewController will be dismissed if tapping the previous button on first page
 //or the next button on final page.
 -(BOOL)usesWrappAroundIndexing;
 -(BOOL)showsPageBullets;
 //Used to validate input
 -(UIView*)updateViewOnPageFlipForwardRejection:(UIView*)view pageIndex:(NSUInteger)index;
 -(UIView*)updateViewOnPageFlipBackwardRejection:(UIView*)view pageIndex:(NSUInteger)index;
+-(UIColor*)titleColorForPageAtIndex:(NSUInteger)index;
 //An array of strings indicating the button titles for each page (should have equal length to number of pages)
 -(NSArray*)pagedAlertControllerButtonTitles;
+-(NSArray*)pagedAlertControllerButtonIcons;
 
 @end
 
-
+/* -------------------------- INTERFACE ------------------------- */
 @interface PagedAlertViewController : UIViewController
 
 -(void)startPagedAlert;
@@ -75,25 +85,17 @@ By itself in only adds navigating functionality, validation and content design i
 @property (weak,nonatomic) id<PagedAlertDataSource> dataSource;
 
 @end
-
 ```
 
 # TODO
 
-- Disable swipe gesture of the UIPageController
 - Create a cocoapod once polished
-
-- Redifine or implement correctly 
-
-```objective-c
--(BOOL)pagedAlert:(UIView*)view shouldFlipToNextPageFromPage:(NSUInteger)index submissionInfo: (NSDictionary*)info;
--(BOOL)pagedAlert:(UIView*)view shouldFlipToPreviousPageFromPage:(NSUInteger)index submissionInfo: (NSDictionary*)info;
-```
-
 - Make UITapGestureRecognizer dismiss the PagedAlertController when tapped on outer area.
 - Remove UIPageViewController bounce
 - Define constraints on PageAlertView xib
-
+- Generalize content view data source method so a PagedAlertController of any size may be constructed.
+- Add other visual options like chosing a blurred background etc.
+- FIX: BUtton user interaction area gets reduced when an icon is added to the button.
 - FIX: Views added throught storyboard dont get centered in container (innerContentView e.g page 6) but views added programatically do. 
 
 
